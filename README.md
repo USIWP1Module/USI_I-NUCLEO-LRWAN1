@@ -27,18 +27,15 @@ void SX1272IoInit( void )
 {
 
   GPIO_InitTypeDef initStruct={0};
-  
     
   initStruct.Mode = GPIO_MODE_IT_RISING;
   initStruct.Pull = GPIO_PULLDOWN;
   initStruct.Speed = GPIO_SPEED_HIGH;
-  
 
   HW_GPIO_Init( RADIO_DIO_0_PORT, RADIO_DIO_0_PIN, &initStruct );
   HW_GPIO_Init( RADIO_DIO_1_PORT, RADIO_DIO_1_PIN, &initStruct );
   HW_GPIO_Init( RADIO_DIO_2_PORT, RADIO_DIO_2_PIN, &initStruct );
   HW_GPIO_Init( RADIO_DIO_3_PORT, RADIO_DIO_3_PIN, &initStruct );
-  
 	
   /* Initialize I-NUCLEO-LRWAN1 Antenna IO */
   initStruct.Mode =GPIO_MODE_OUTPUT_PP;
