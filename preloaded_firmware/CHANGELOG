@@ -1,0 +1,64 @@
+=====================================================================
+I-NUCLEO-LRWAN Preloaded AT command Software - CHANGELOG
+=====================================================================
+
+Changes for version 2.9
+* bug-fix
+  * LoraWAN certification fail item: TC_MAC_US_016
+  
+* New features:
+  * Enabling Class-C behavior by command AT+CLASS
+
+
+Changes for version 2.8
+* New AT commands:
+  * AT+VERB
+* Removed AT commands:
+  AT+CER
+  ATI
+
+
+Changes for version 2.7
+* New features
+  * the settings for ADR, RX2DR, dutycyle and public network can be keep in DCT separately
+  
+
+Changes for version 2.6
+* bug-fix
+  * Correct the algorithm of SNR.
+  * LoraWAN certification fail item: TC_MAC_EU_003, TC_MAC_EU_014.
+  * Changed DR for RX2 can not be keep by AT command AT+WDCT
+* AT command for Mfg. test
+  * New commands:
+    AT+RF
+  * Removed commands:
+    ATP
+    AT+RSSI
+    AT+SNR
+    AT+RSTAT
+    AT+SF
+    AT+FRE
+    AT+TXP
+    AT+CR
+    AT+IQP
+    AT+PL
+    AT+TXON
+    AT+RXON
+    AT+STOP
+    AT+BW
+    AT+TONE
+    AT+RDCT
+    AT?
+
+
+Changes for version 2.5
+* New features
+  * Supported to update the preloaded software via an update tool on Windows PC.
+
+
+Changes for version 2.4
+* bug-fix
+  * Input the AT command with over 10 parameters will cause device reset.
+  * AT+RIIC command will cause device hang.
+
+
