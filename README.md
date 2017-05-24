@@ -112,7 +112,7 @@ void SX1272SetAntSw( uint8_t opMode )
   LORAWAN_DEVICE_ADDRESS
   LORAWAN_NWKSKEY
   LORAWAN_APPSKEY
-  
+   
   
   b.	In 'en.i-cube_lrwan\STM32CubeExpansion_LRWAN_V1.1.0\Middlewares\Third_Party\Lora\Mac\region\RegionEU868.h'
   #define EU868_DUTY_CYCLE_ENABLED 0  // to enabling to update node data every 10 seconds to gateway
