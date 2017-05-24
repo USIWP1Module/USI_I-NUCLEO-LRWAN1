@@ -25,26 +25,33 @@ The following shows how to patch the ping definition and antenna control logic:
 
 void SX1272IoInit( void )
 {
+
   GPIO_InitTypeDef initStruct={0};
   
+    
   initStruct.Mode = GPIO_MODE_IT_RISING;
   initStruct.Pull = GPIO_PULLDOWN;
   initStruct.Speed = GPIO_SPEED_HIGH;
+  
 
   HW_GPIO_Init( RADIO_DIO_0_PORT, RADIO_DIO_0_PIN, &initStruct );
   HW_GPIO_Init( RADIO_DIO_1_PORT, RADIO_DIO_1_PIN, &initStruct );
   HW_GPIO_Init( RADIO_DIO_2_PORT, RADIO_DIO_2_PIN, &initStruct );
   HW_GPIO_Init( RADIO_DIO_3_PORT, RADIO_DIO_3_PIN, &initStruct );
+  
 	
   /* Initialize I-NUCLEO-LRWAN1 Antenna IO */
   initStruct.Mode =GPIO_MODE_OUTPUT_PP;
   initStruct.Pull = GPIO_NOPULL; 
   initStruct.Speed = GPIO_SPEED_HIGH;
   
+  
   HW_GPIO_Init( RADIO_ANT_SWITCH_PORT, RADIO_ANT_SWITCH_PIN, &initStruct  ); 
   HW_GPIO_Init( RADIO_ANT2_SWITCH_PORT, RADIO_ANT2_SWITCH_PIN, &initStruct  ); 
-	
+
+
 }
+
 
 
 // 2. Replace SX1272SetAntSw() in sx1272mb2das.c with the code below.
