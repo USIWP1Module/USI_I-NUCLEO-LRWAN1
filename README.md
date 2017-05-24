@@ -61,7 +61,6 @@ void SX1272IoInit( void )
 // 2. Replace SX1272SetAntSw() in sx1272mb2das.c with the code below.
 
 void SX1272SetAntSw( uint8_t opMode )
-
 {
 
     switch( opMode )
