@@ -1,6 +1,9 @@
 =====================================================================
+
 How to update I-NUCLEO-LRWAN Preloaded AT command Software
+
 =====================================================================
+
 
 #1 download sm42_fw_update_tool from the link below, and upzip it on the Windows PC
    https://github.com/USILoRaModule/USI_I-NUCLEO-LRWAN1/blob/master/preloaded_firmware/sm42_fw_update_tool_v1.1.zip
