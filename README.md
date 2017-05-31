@@ -24,7 +24,9 @@ The following shows how to patch the ping definition and antenna control logic:
 // 1. Replace SX1272IoInit() in sx1272mb2das.c with the code below.
 
 void SX1272IoInit( void )
+
 {
+
 
   GPIO_InitTypeDef initStruct={0};
     
@@ -61,7 +63,9 @@ void SX1272IoInit( void )
 // 2. Replace SX1272SetAntSw() in sx1272mb2das.c with the code below.
 
 void SX1272SetAntSw( uint8_t opMode )
+
 {
+
 
     switch( opMode )
     {
@@ -104,20 +108,30 @@ void SX1272SetAntSw( uint8_t opMode )
 (5)	Patch is done at this step, you can make AT_Master, End_Node or PingPong project code for I-NUCLEO-LRWAN.
 
 (6)	You can test the LoraWAN connectivity with Semtech sx1301 gateway starter-kit using End_Node project code, and just need to correct the configurations below:
+
   a.	in 'en.i-cube_lrwan\STM32CubeExpansion_LRWAN_V1.1.0\Projects\Multi\Applications\LoRa\End_Node\inc\Comissioning.h':
+  
   // correct the definition below depended on your sx1301 gateway:
+  
   OVER_THE_AIR_ACTIVATION
+  
   LORAWAN_APPLICATION_EUI
+  
   LORAWAN_APPLICATION_KEY
+  
   LORAWAN_DEVICE_ADDRESS
+  
   LORAWAN_NWKSKEY
+  
   LORAWAN_APPSKEY
    
   
   b.	In 'en.i-cube_lrwan\STM32CubeExpansion_LRWAN_V1.1.0\Middlewares\Third_Party\Lora\Mac\region\RegionEU868.h'
+  
   #define EU868_DUTY_CYCLE_ENABLED 0  // to enabling to update node data every 10 seconds to gateway
   
   c.	In 'en.i-cube_lrwan\STM32CubeExpansion_LRWAN_V1.1.0\Middlewares\Third_Party\Lora\Core\lora.c'
+  
   #define USE_SEMTECH_DEFAULT_CHANNEL_LINEUP  1   // let the node uses DR3 on RX2
 
 
