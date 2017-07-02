@@ -2,6 +2,14 @@
 I-NUCLEO-LRWAN Preloaded AT command Software - CHANGELOG
 =====================================================================
 
+Changes for version 3.0
+* bug-fix
+  * receiving abnormal when run in class-c continuous receiving mode.
+
+* New features:
+  * Support BM-22 lite Lora-gateway function.
+
+
 Changes for version 2.9
 * bug-fix
   * LoraWAN certification fail item: TC_MAC_US_016
