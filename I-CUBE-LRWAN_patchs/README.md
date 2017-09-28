@@ -81,9 +81,9 @@ void SX1272SetAntSw( uint8_t opMode )
 
     /* Switch the antenna of I-NUCLEO-LRWAN1 in TX mode */
 
-    HW_GPIO_Write( RADIO_ANT_SWITCH_PORT, RADIO_ANT_SWITCH_PIN, 0);
+    HW_GPIO_Write( RADIO_ANT_SWITCH_PORT, RADIO_ANT_SWITCH_PIN, 1);
     
-    HW_GPIO_Write( RADIO_ANT2_SWITCH_PORT, RADIO_ANT2_SWITCH_PIN, 1);
+    HW_GPIO_Write( RADIO_ANT2_SWITCH_PORT, RADIO_ANT2_SWITCH_PIN, 0);
     
     break;
 
@@ -99,9 +99,9 @@ void SX1272SetAntSw( uint8_t opMode )
 
     /* Switch the antenna of I-NUCLEO-LRWAN1 in RX mode */
 
-    HW_GPIO_Write( RADIO_ANT_SWITCH_PORT, RADIO_ANT_SWITCH_PIN, 1);
+    HW_GPIO_Write( RADIO_ANT_SWITCH_PORT, RADIO_ANT_SWITCH_PIN, 0);
 
-    HW_GPIO_Write( RADIO_ANT2_SWITCH_PORT, RADIO_ANT2_SWITCH_PIN, 0);
+    HW_GPIO_Write( RADIO_ANT2_SWITCH_PORT, RADIO_ANT2_SWITCH_PIN, 1);
 
     break;
 
