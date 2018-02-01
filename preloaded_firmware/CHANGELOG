@@ -2,6 +2,19 @@
 I-NUCLEO-LRWAN Preloaded AT command Software - CHANGELOG
 =====================================================================
 
+Changes for version 3.3
+* bug-fix
+  * AT+BAND goes back to 0 (default value) caused by other commands.
+* DCT
+  * change default system clock from HSI32 to MSI.
+  * change default power saving mode from STOP mode to STANDBY mode.
+  
+
+Changes for version 3.2
+* New features:
+  * Support LoraWAN IN865 Region.
+  
+  
 Changes for version 3.0
 * bug-fix
   * receiving abnormal when run in class-c continuous receiving mode.
