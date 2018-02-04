@@ -4,6 +4,7 @@ The I-NUCLEO-LRWAN1 features the USI LoraWAN module WM-SG-SM-42 with preloaded A
 The following shows how to patch the ping definition and antenna control logic:
 
 (1)	Download the I-CUBE-LRWAN 1.1.4 from the link below:
+http://www.st.com/en/embedded-software/i-cube-lrwan.html
 
 (2)	Download the IO definition header file of I-NUCLEO-LRWAN from the Github link below: https://github.com/USILoRaModule/USI_I-NUCLEO-LRWAN1/blob/master/I-CUBE-LRWAN_patchs/I-CUBE-LRWAN%201.1.4/stm32l0xx_hw_conf.h.1.1.4
 
