@@ -15,7 +15,7 @@ Maintainer: Miguel Luis and Gregory Cristian
  /******************************************************************************
   * @file    stm32l0xx_hw_conf.h
   * @author  MCD Application Team
-  * @version V1.1.4
+  * @version V1.1.0
   * @date    05-February-2018
   * @brief   contains hardaware configuration Macros and Constants for I-NUCLEO-LRWAN Board
   ******************************************************************************
