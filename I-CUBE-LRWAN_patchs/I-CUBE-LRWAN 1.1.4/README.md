@@ -107,9 +107,9 @@ void SX1272SetAntSw( uint8_t opMode )
 #define RFLR_PACONFIG_PASELECT_RFO 0x80   // to enable PA_BOOTST for TX
 
 
-(5)	Patch is done at this step, you can make AT_Master, End_Node or PingPong project code for I-NUCLEO-LRWAN.
+(6)	Patch is done at this step, you can make AT_Master, End_Node or PingPong project code for I-NUCLEO-LRWAN.
 
-(6)	You can test the LoraWAN connectivity with Semtech sx1301 gateway starter-kit using End_Node project code, and just need to correct the configurations below:
+(7)	You can test the LoraWAN connectivity with Semtech sx1301 gateway starter-kit using End_Node project code, and just need to correct the configurations below:
 
 a.	in 'en.i-cube_lrwan\STM32CubeExpansion_LRWAN_V1.1.4\Projects\Multi\Applications\LoRa\{AT_Master|AT_Slave|End_Node|PingPong}\inc\Comissioning.h':
 
