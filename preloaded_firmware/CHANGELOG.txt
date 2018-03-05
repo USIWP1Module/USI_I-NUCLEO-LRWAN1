@@ -2,6 +2,14 @@
 I-NUCLEO-LRWAN Preloaded AT command Software - CHANGELOG
 =====================================================================
 
+Changes for version 3.4
+
+* New features:
+  * Support new LoraWAN regions:
+    AS923  (General)
+    TH923  (Thailand 920-925)
+
+
 Changes for version 3.3
 * bug-fix
   * AT+BAND goes back to 0 (default value) caused by other commands.
