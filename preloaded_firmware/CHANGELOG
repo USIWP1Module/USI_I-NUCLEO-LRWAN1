@@ -2,6 +2,17 @@
 I-NUCLEO-LRWAN Preloaded AT command Software - CHANGELOG
 =====================================================================
 
+Changes for version 3.5
+
+* bug-fix
+  * the device (was configured as US915 BAND by command AT+BAND=1) seems to hang when run any TX command, like AT+JOIN=1 or AT+SEND.
+  
+* New features:
+  * Support new LoraWAN regions:
+    AS923  (Japan)
+    KR920  (Korea 920-923)
+
+
 Changes for version 3.4
 
 * New features:
