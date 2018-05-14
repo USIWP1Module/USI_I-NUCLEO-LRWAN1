@@ -2,6 +2,13 @@
 I-NUCLEO-LRWAN Preloaded AT command Software - CHANGELOG
 =====================================================================
 
+Changes for version 3.7
+
+* bug-fix
+  * the device could not join US915 gateway with OTAA protocol when MCU runs at MSI 4Mhz clock speed.
+
+
+
 Changes for version 3.5
 
 * bug-fix
