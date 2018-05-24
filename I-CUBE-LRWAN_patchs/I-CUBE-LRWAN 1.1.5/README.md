@@ -1,8 +1,10 @@
 The I-NUCLEO-LRWAN1 features the USI LoraWAN module WM-SG-SM-42 with preloaded AT-Command software, and can be controlled from an external host such as NUCLEO-L053 boards. You can also develop your own application based on the I-CUBE-LRWAN to control it without external host. You just need to correct the ping definition and antenna switch logic to run the I-CUBE-LRWAN on the I-NUCLEO-LRWAN1.
-The following shows how to patch the ping definition and antenna control logic:
-(1) Download the I-CUBE-LRWAN 1.1.4 from the link below:
+You can follow the following steps to patch the ping definition and antenna control logic for the EndNode Application of I-CUBE-LRWAN:
+
+(1) Download the I-CUBE-LRWAN 1.1.5 from the link below:
 http://www.st.com/en/embedded-software/i-cube-lrwan.html
-(2) Download the IO definition header file of I-NUCLEO-LRWAN from the Github link below:
+
+(2) Download the patch file from the Github link below:
 https://github.com/USILoRaModule/USI_I-NUCLEO-LRWAN1/blob/master/I-CUBE-LRWAN_patchs/I-CUBE-LRWAN%201.1.4/stm32l0xx_hw_conf.h.1.1.4
 (3) Unzip the en.i-cube_lrwan.zip, and replace stm32l0xx_hw_conf.h with the downloaded ‘stm32l0xx_hw_conf.h.1.1.4’ depended on the working project below:
 a. For AT_Master project:
