@@ -28,6 +28,11 @@ STM32CubeExpansion_LRWAN_V1.1.5\Projects\Multi\Applications\LoRa\End_Node\
 (5) when the EndNode application is running, debug log will print on the pin 2 of JP6 of the I-NUCLEO_LRWAN1, this pin is an UART-TX, you can monitor the log by using a UART tool with configuration 115200,N,8,1,None in default
 
 
+(7) you can change the End device commissioning parameters (Activation,NSK,ASK,APPEUI,DEV-EUI...) in this file below:
+
+STM32CubeExpansion_LRWAN_V1.1.5\Projects\Multi\Applications\LoRa\End_Node\inc\Commissioning.h
+
+
 
 (6) you can change the LoraWAN region by refer to the description in the file below:
 
