@@ -41,4 +41,13 @@ STM32CubeExpansion_LRWAN_V1.1.5\Projects\Multi\Applications\LoRa\End_Node\src\ma
 
 
 
+(8) for patch PingPong Application, just replace the file:
+
+STM32CubeExpansion_LRWAN_V1.1.5\Projects\Multi\Applications\LoRa\PingPong\inc\stm32l0xx_hw_conf.h
+
+with the file from End_Node project:
+
+STM32CubeExpansion_LRWAN_V1.1.5\Projects\Multi\Applications\LoRa\End_Node\inc\stm32l0xx_hw_conf.h
+
+
 
