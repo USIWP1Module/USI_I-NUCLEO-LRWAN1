@@ -19,52 +19,52 @@ $ patch -p1 < ../sm42-lrwan_v1.1.5.patch     <--- assume 'sm42-lrwan_v1.1.5.patc
 
 [4] Build & Test EndNode Demo Application
 
-(4-1) open EndNode Project file from the path below based on your IDE tool, and then build and flash into the I-NUCLEO_LRWAN1.
+  (4-1) open EndNode Project file from the path below based on your IDE tool, and then build and flash into the I-NUCLEO_LRWAN1.
 
 STM32CubeExpansion_LRWAN_V1.1.5\Projects\Multi\Applications\LoRa\End_Node\{EWARM|MDK-ARM|SW4STM32}\STM32L053R8-Nucleo\Lora. uvprojx
 
 
 
-(4-2) when the EndNode application is running, debug log will print on the pin 2 of JP6 of the I-NUCLEO_LRWAN1, this pin is an UART-TX, you can monitor the log by using a UART tool with configuration 115200,N,8,1,None in default
+  (4-2) when the EndNode application is running, debug log will print on the pin 2 of JP6 of the I-NUCLEO_LRWAN1, this pin is an UART-TX, you can monitor the log by using a UART tool with configuration 115200,N,8,1,None in default
 
 
-(4-3) you can change the End device commissioning parameters (Activation,NSK,ASK,APPEUI,DEV-EUI...) in this file below:
+  (4-3) you can change the End device commissioning parameters (Activation,NSK,ASK,APPEUI,DEV-EUI...) in this file below:
 
 STM32CubeExpansion_LRWAN_V1.1.5\Projects\Multi\Applications\LoRa\End_Node\inc\Commissioning.h
 
 
-(4-4) you can change the LoraWAN region by refer to the description in the file below:
+  (4-4) you can change the LoraWAN region by refer to the description in the file below:
 
 STM32CubeExpansion_LRWAN_V1.1.5\Middlewares\Third_Party\Lora\Mac\region\Region.h
 
 
-(4-5) the TX payload can be changed in the function send() in the file below:
+  (4-5) the TX payload can be changed in the function send() in the file below:
 
 STM32CubeExpansion_LRWAN_V1.1.5\Projects\Multi\Applications\LoRa\End_Node\src\main.c
 
 
 [5] Build & Test AT-Slave Demo Application
 
-(5-1) the original AT-Slave code is only for B-L072Z-LRWAN1 hardware, and this patch is for patch the code to run AT-Slave code on I-NUCLEO_LRWAN1 hardware based on the MDK-ARM IDE tool only, so please open the patched AT-Slave Project file from the path below using MDK-ARM IDE tool, and then build and flash into the I-NUCLEO_LRWAN1.
+  (5-1) the original AT-Slave code is only for B-L072Z-LRWAN1 hardware, and this patch is for patch the code to run AT-Slave code on I-NUCLEO_LRWAN1 hardware based on the MDK-ARM IDE tool only, so please open the patched AT-Slave Project file from the path below using MDK-ARM IDE tool, and then build and flash into the I-NUCLEO_LRWAN1.
 
 STM32CubeExpansion_LRWAN_V1.1.5\Projects\Multi\Applications\LoRa\AT_Slave\MDK-ARM\B-L072Z-LRWAN1\Lora. uvprojx
 
 
-(5-2) when the AT-Slave application is running, you can see debug log and AT command responses on the UART-TX (pin CN9-1), and also can input AT command on UART-RX (pin CN9-2), these UART configuration is 115200,N,8,1,None
+  (5-2) when the AT-Slave application is running, you can see debug log and AT command responses on the UART-TX (pin CN9-1), and also can input AT command on UART-RX (pin CN9-2), these UART configuration is 115200,N,8,1,None
 
 
-(5-3) you can change the LoraWAN commissioning parameters (Activation,NSK,ASK,APPEUI,DEV-EUI...) in this file below:
+  (5-3) you can change the LoraWAN commissioning parameters (Activation,NSK,ASK,APPEUI,DEV-EUI...) in this file below:
 
 
 STM32CubeExpansion_LRWAN_V1.1.5\Projects\Multi\Applications\LoRa\AT_Slave\inc\Commissioning.h
 
 
-(5-4) you can change the LoraWAN region by refer to the description in the file below:
+  (5-4) you can change the LoraWAN region by refer to the description in the file below:
 
 STM32CubeExpansion_LRWAN_V1.1.5\Middlewares\Third_Party\Lora\Mac\region\Region.h
 
 
-(5-5) you can change the LoraWAN region by refer to the description in the file below:
+  (5-5) you can change the LoraWAN region by refer to the description in the file below:
 
 AT+DCS=0    <--- disable duty cycle
 
