@@ -1,6 +1,6 @@
 diff -uNr before/Drivers/BSP/Components/sx1272/sx1272Regs-LoRa.h after/Drivers/BSP/Components/sx1272/sx1272Regs-LoRa.h
 --- before/Drivers/BSP/Components/sx1272/sx1272Regs-LoRa.h	2018-03-29 20:40:09.997839600 +0800
-+++ after/Drivers/BSP/Components/sx1272/sx1272Regs-LoRa.h	2018-05-24 13:22:27.374011600 +0800
++++ after/Drivers/BSP/Components/sx1272/sx1272Regs-LoRa.h	2018-05-24 16:50:56.084468900 +0800
 @@ -138,7 +138,7 @@
   */
  #define RFLR_PACONFIG_PASELECT_MASK                 0x7F
@@ -12,7 +12,7 @@ diff -uNr before/Drivers/BSP/Components/sx1272/sx1272Regs-LoRa.h after/Drivers/B
  
 diff -uNr before/Drivers/BSP/sx1272mb2das/sx1272mb2das.c after/Drivers/BSP/sx1272mb2das/sx1272mb2das.c
 --- before/Drivers/BSP/sx1272mb2das/sx1272mb2das.c	2018-03-29 20:40:06.854525300 +0800
-+++ after/Drivers/BSP/sx1272mb2das/sx1272mb2das.c	2018-05-24 13:49:12.721832300 +0800
++++ after/Drivers/BSP/sx1272mb2das/sx1272mb2das.c	2018-05-24 16:50:56.102470000 +0800
 @@ -130,20 +130,39 @@
  void SX1272SetXO( uint8_t state )
  {
@@ -130,51 +130,1236 @@ diff -uNr before/Drivers/BSP/sx1272mb2das/sx1272mb2das.c after/Drivers/BSP/sx127
  bool SX1272CheckRfFrequency( uint32_t frequency )
  {
      // Implement check. Currently all frequencies are supported
-diff -uNr before/Projects/Multi/Applications/LoRa/End_Node/inc/Commissioning.h after/Projects/Multi/Applications/LoRa/End_Node/inc/Commissioning.h
---- before/Projects/Multi/Applications/LoRa/End_Node/inc/Commissioning.h	2018-03-29 20:39:57.288568800 +0800
-+++ after/Projects/Multi/Applications/LoRa/End_Node/inc/Commissioning.h	2018-05-24 11:30:47.458798400 +0800
-@@ -82,7 +82,7 @@
-  * When set to 1 the application uses the Over-the-Air activation procedure
-  * When set to 0 the application uses the Personalization activation procedure
-  */
--#define OVER_THE_AIR_ACTIVATION                     1
-+#define OVER_THE_AIR_ACTIVATION                     0
+diff -uNr before/Projects/Multi/Applications/LoRa/AT_Slave/inc/mlm32l0xx_hw_conf.h after/Projects/Multi/Applications/LoRa/AT_Slave/inc/mlm32l0xx_hw_conf.h
+--- before/Projects/Multi/Applications/LoRa/AT_Slave/inc/mlm32l0xx_hw_conf.h	2018-03-29 20:39:58.928732800 +0800
++++ after/Projects/Multi/Applications/LoRa/AT_Slave/inc/mlm32l0xx_hw_conf.h	2018-05-26 15:54:43.320581800 +0800
+@@ -72,14 +72,14 @@
  
- /*!
-  * Indicates if the end-device is to be connected to a private or public network
-@@ -107,12 +107,12 @@
- /*!
-  * Application IEEE EUI (big endian)
-  */
--#define LORAWAN_APPLICATION_EUI                     { 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01 }
-+#define LORAWAN_APPLICATION_EUI                     { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }
+ /* LORA I/O definition */
  
- /*!
-  * AES encryption/decryption cipher application key
-  */
--#define LORAWAN_APPLICATION_KEY                     { 0x2B, 0x7E, 0x15, 0x16, 0x28, 0xAE, 0xD2, 0xA6, 0xAB, 0xF7, 0x15, 0x88, 0x09, 0xCF, 0x4F, 0x3C }
-+#define LORAWAN_APPLICATION_KEY                     { 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88, 0x99, 0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF, 0x00 }
+-#define RADIO_RESET_PORT                          GPIOC
+-#define RADIO_RESET_PIN                           GPIO_PIN_0
++#define RADIO_RESET_PORT                          GPIOA
++#define RADIO_RESET_PIN                           GPIO_PIN_9
  
- #if( OVER_THE_AIR_ACTIVATION == 0 )
+ #define RADIO_MOSI_PORT                           GPIOA
+-#define RADIO_MOSI_PIN                            GPIO_PIN_7
++#define RADIO_MOSI_PIN                            GPIO_PIN_12
  
-@@ -138,12 +138,12 @@
- /*!
-  * AES encryption/decryption cipher network session key
-  */
--#define LORAWAN_NWKSKEY                             { 0x2B, 0x7E, 0x15, 0x16, 0x28, 0xAE, 0xD2, 0xA6, 0xAB, 0xF7, 0x15, 0x88, 0x09, 0xCF, 0x4F, 0x3C }
-+#define LORAWAN_NWKSKEY                             { 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88, 0x99, 0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF, 0x00 }
+-#define RADIO_MISO_PORT                           GPIOA
+-#define RADIO_MISO_PIN                            GPIO_PIN_6
++#define RADIO_MISO_PORT                           GPIOB
++#define RADIO_MISO_PIN                            GPIO_PIN_4
  
- /*!
-  * AES encryption/decryption cipher application session key
-  */
--#define LORAWAN_APPSKEY                             { 0x2B, 0x7E, 0x15, 0x16, 0x28, 0xAE, 0xD2, 0xA6, 0xAB, 0xF7, 0x15, 0x88, 0x09, 0xCF, 0x4F, 0x3C }
-+#define LORAWAN_APPSKEY                             { 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88, 0x99, 0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF, 0x00 }
+ #define RADIO_SCLK_PORT                           GPIOB
+ #define RADIO_SCLK_PIN                            GPIO_PIN_3
+@@ -87,23 +87,27 @@
+ #define RADIO_NSS_PORT                            GPIOA
+ #define RADIO_NSS_PIN                             GPIO_PIN_15
  
- #endif /* OVER_THE_AIR_ACTIVATION == 0 */
+-#define RADIO_DIO_0_PORT                          GPIOB
+-#define RADIO_DIO_0_PIN                           GPIO_PIN_4
++#define RADIO_DIO_0_PORT                          GPIOA
++#define RADIO_DIO_0_PIN                           GPIO_PIN_2
  
+-#define RADIO_DIO_1_PORT                          GPIOB
+-#define RADIO_DIO_1_PIN                           GPIO_PIN_1
++#define RADIO_DIO_1_PORT                          GPIOA
++#define RADIO_DIO_1_PIN                           GPIO_PIN_3
+ 
+-#define RADIO_DIO_2_PORT                          GPIOB
+-#define RADIO_DIO_2_PIN                           GPIO_PIN_0
++#define RADIO_DIO_2_PORT                          GPIOA
++#define RADIO_DIO_2_PIN                           GPIO_PIN_5
+ 
+-#define RADIO_DIO_3_PORT                          GPIOC
+-#define RADIO_DIO_3_PIN                           GPIO_PIN_13
++#define RADIO_DIO_3_PORT                          GPIOA
++#define RADIO_DIO_3_PIN                           GPIO_PIN_6
+ 
++#ifdef RADIO_DIO_4 
+ #define RADIO_DIO_4_PORT                          GPIOA
+-#define RADIO_DIO_4_PIN                           GPIO_PIN_5
++#define RADIO_DIO_4_PIN                           GPIO_PIN_10
++#endif
+ 
+-#define RADIO_DIO_5_PORT                          GPIOA
+-#define RADIO_DIO_5_PIN                           GPIO_PIN_4
++#ifdef RADIO_DIO_5 
++#define RADIO_DIO_5_PORT                          GPIOC
++#define RADIO_DIO_5_PIN                           GPIO_PIN_13
++#endif
+ 
+ #define RADIO_TCXO_VCC_PORT                       GPIOA
+ #define RADIO_TCXO_VCC_PIN                        GPIO_PIN_12
+@@ -117,6 +121,13 @@
+ #define RADIO_ANT_SWITCH_PORT_TX_RFO              GPIOC //CRF2
+ #define RADIO_ANT_SWITCH_PIN_TX_RFO               GPIO_PIN_2
+ 
++#define RADIO_ANT_SWITCH_PORT                     GPIOA
++#define RADIO_ANT_SWITCH_PIN                      GPIO_PIN_4
++
++#define RADIO_ANT2_SWITCH_PORT                     GPIOB        
++#define RADIO_ANT2_SWITCH_PIN                      GPIO_PIN_8   
++
++
+ /*  SPI MACRO redefinition */
+ 
+ #define SPI_CLK_ENABLE()                __HAL_RCC_SPI1_CLK_ENABLE()
+@@ -133,18 +144,22 @@
+ /* Definition for UARTx clock resources */
+ #define UARTX                           LPUART1
+ #define UARTX_CLK_ENABLE()              LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_LPUART1)
+-#define UARTX_RX_GPIO_CLK_ENABLE()      LL_IOP_GRP1_EnableClock(RCC_IOPENR_GPIOBEN)
+-#define UARTX_TX_GPIO_CLK_ENABLE()      LL_IOP_GRP1_EnableClock(RCC_IOPENR_GPIOBEN)
++#define UARTX_RX_GPIO_CLK_ENABLE()      LL_IOP_GRP1_EnableClock(LL_IOP_GRP1_PERIPH_GPIOB)
++#define UARTX_TX_GPIO_CLK_ENABLE()      LL_IOP_GRP1_EnableClock(LL_IOP_GRP1_PERIPH_GPIOB)
++
++//  LL_IOP_GRP1_EnableClock(LL_IOP_GRP1_PERIPH_GPIOB);
++
++
+ 
+ #define UARTX_FORCE_RESET()             LL_APB1_GRP1_ForceReset(LL_APB1_GRP1_PERIPH_LPUART1)
+ #define UARTX_RELEASE_RESET()           LL_APB1_GRP1_ReleaseReset(LL_APB1_GRP1_PERIPH_LPUART1)
+ 
+-#define UARTX_TX_PIN                    GPIO_PIN_2
+-#define UARTX_TX_GPIO_PORT              GPIOA
+-#define UARTX_TX_AF                     GPIO_AF6_LPUART1
+-#define UARTX_RX_PIN                    GPIO_PIN_3
+-#define UARTX_RX_GPIO_PORT              GPIOA
+-#define UARTX_RX_AF                     GPIO_AF6_LPUART1
++#define UARTX_TX_PIN                    GPIO_PIN_10
++#define UARTX_TX_GPIO_PORT              GPIOB
++#define UARTX_TX_AF                     GPIO_AF4_LPUART1
++#define UARTX_RX_PIN                    GPIO_PIN_11
++#define UARTX_RX_GPIO_PORT              GPIOB
++#define UARTX_RX_AF                     GPIO_AF4_LPUART1
+ 
+ /* Definition for USARTx's NVIC */
+ #define UARTX_IRQn                      LPUART1_IRQn
+diff -uNr before/Projects/Multi/Applications/LoRa/AT_Slave/inc/stm32l0xx_hal_conf.h after/Projects/Multi/Applications/LoRa/AT_Slave/inc/stm32l0xx_hal_conf.h
+--- before/Projects/Multi/Applications/LoRa/AT_Slave/inc/stm32l0xx_hal_conf.h	2018-03-29 20:39:58.916731600 +0800
++++ after/Projects/Multi/Applications/LoRa/AT_Slave/inc/stm32l0xx_hal_conf.h	2018-03-29 20:39:55.940434000 +0800
+@@ -1,192 +1,187 @@
+ /**
+- ******************************************************************************
+- * @file    stm32l0xx_hal_conf.h
+- * @author  MCD Application Team
+- * @version V1.1.5
+- * @date    30-March-2018
+- * @brief   HAL configuration file.
+- ******************************************************************************
+- * @attention
+- *
+- * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
+- * All rights reserved.</center></h2>
+- *
+- * Redistribution and use in source and binary forms, with or without
+- * modification, are permitted, provided that the following conditions are met:
+- *
+- * 1. Redistribution of source code must retain the above copyright notice,
+- *    this list of conditions and the following disclaimer.
+- * 2. Redistributions in binary form must reproduce the above copyright notice,
+- *    this list of conditions and the following disclaimer in the documentation
+- *    and/or other materials provided with the distribution.
+- * 3. Neither the name of STMicroelectronics nor the names of other
+- *    contributors to this software may be used to endorse or promote products
+- *    derived from this software without specific written permission.
+- * 4. This software, including modifications and/or derivative works of this
+- *    software, must execute solely and exclusively on microcontroller or
+- *    microprocessor devices manufactured by or for STMicroelectronics.
+- * 5. Redistribution and use of this software other than as permitted under
+- *    this license is void and will automatically terminate your rights under
+- *    this license.
+- *
+- * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
+- * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
+- * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+- * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
+- * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+- * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+- * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+- *
+- ******************************************************************************
+- */
++  ******************************************************************************
++  * @file    stm32l0xx_hal_conf.h
++  * @author  MCD Application Team
++  * @version V1.1.5
++  * @date    30-March-2018
++  * @brief   HAL configuration file. 
++  ******************************************************************************
++  * @attention
++  *
++  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
++  * All rights reserved.</center></h2>
++  *
++  * Redistribution and use in source and binary forms, with or without 
++  * modification, are permitted, provided that the following conditions are met:
++  *
++  * 1. Redistribution of source code must retain the above copyright notice, 
++  *    this list of conditions and the following disclaimer.
++  * 2. Redistributions in binary form must reproduce the above copyright notice,
++  *    this list of conditions and the following disclaimer in the documentation
++  *    and/or other materials provided with the distribution.
++  * 3. Neither the name of STMicroelectronics nor the names of other 
++  *    contributors to this software may be used to endorse or promote products 
++  *    derived from this software without specific written permission.
++  * 4. This software, including modifications and/or derivative works of this 
++  *    software, must execute solely and exclusively on microcontroller or
++  *    microprocessor devices manufactured by or for STMicroelectronics.
++  * 5. Redistribution and use of this software other than as permitted under 
++  *    this license is void and will automatically terminate your rights under 
++  *    this license. 
++  *
++  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
++  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
++  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
++  * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
++  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
++  * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
++  * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
++  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
++  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
++  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
++  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
++  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++  *
++  ******************************************************************************
++  */ 
+ 
+ /* Define to prevent recursive inclusion -------------------------------------*/
+ #ifndef __STM32L0xx_HAL_CONF_H__
+ #define __STM32L0xx_HAL_CONF_H__
+ 
+ #ifdef __cplusplus
+-extern "C" {
++ extern "C" {
+ #endif
+ 
+-#include "stm32l0xx_hal_def.h"
+-
+ /* Exported types ------------------------------------------------------------*/
+ /* Exported constants --------------------------------------------------------*/
+ 
+ /* ########################## Module Selection ############################## */
+ /**
+- * @brief This is the list of modules to be used in the HAL driver
+- */
+-/* #define HAL_MODULE_ENABLED */
+-/* #define HAL_ADC_MODULE_ENABLED */
+-/* #define HAL_COMP_MODULE_ENABLED */
+-/* #define HAL_CRC_MODULE_ENABLED */
+-/* #define HAL_CRYP_MODULE_ENABLED */
+-/* #define HAL_DAC_MODULE_ENABLED */
+- #define HAL_DMA_MODULE_ENABLED
+-/* #define HAL_FLASH_MODULE_ENABLED */
+-/* #define HAL_GPIO_MODULE_ENABLED */
+-/* #define HAL_I2C_MODULE_ENABLED */
+-/* #define HAL_I2S_MODULE_ENABLED */
+-/* #define HAL_IWDG_MODULE_ENABLED */
+-/* #define HAL_LCD_MODULE_ENABLED */
++  * @brief This is the list of modules to be used in the HAL driver 
++  */
++#define HAL_MODULE_ENABLED  
++#define HAL_ADC_MODULE_ENABLED    
++/* #define HAL_COMP_MODULE_ENABLED  */
++/* #define HAL_CRC_MODULE_ENABLED   */
++/* #define HAL_CRYP_MODULE_ENABLED   */
++/* #define HAL_DAC_MODULE_ENABLED    */
++#define HAL_DMA_MODULE_ENABLED
++#define HAL_FLASH_MODULE_ENABLED
++#define HAL_GPIO_MODULE_ENABLED
++#define HAL_I2C_MODULE_ENABLED 
++/* #define HAL_I2S_MODULE_ENABLED    */
++#define HAL_IWDG_MODULE_ENABLED
++/* #define HAL_LCD_MODULE_ENABLED  */
+ /* #define HAL_LPTIM_MODULE_ENABLED */
+-/* #define HAL_PWR_MODULE_ENABLED */
+-/* #define HAL_RCC_MODULE_ENABLED */
+-/* #define HAL_RNG_MODULE_ENABLED */
+-/* #define HAL_RTC_MODULE_ENABLED */
+-/* #define HAL_SPI_MODULE_ENABLED */
+-/* #define HAL_TIM_MODULE_ENABLED */
+-/* #define HAL_TSC_MODULE_ENABLED */
+- #define HAL_UART_MODULE_ENABLED 
+- #define HAL_USART_MODULE_ENABLED 
+-/* #define HAL_IRDA_MODULE_ENABLED */
+-/* #define HAL_SMARTCARD_MODULE_ENABLED */
+-/* #define HAL_SMBUS_MODULE_ENABLED */
+-/* #define HAL_WWDG_MODULE_ENABLED */
+- #define HAL_CORTEX_MODULE_ENABLED 
+-/* #define HAL_PCD_MODULE_ENABLED */
++#define HAL_PWR_MODULE_ENABLED  
++#define HAL_RCC_MODULE_ENABLED 
++/* #define HAL_RNG_MODULE_ENABLED    */
++ #define HAL_RTC_MODULE_ENABLED 
++ #define HAL_SPI_MODULE_ENABLED    
++#define HAL_TIM_MODULE_ENABLED
++/* #define HAL_TSC_MODULE_ENABLED    */
++ #define HAL_UART_MODULE_ENABLED  
++/* #define HAL_USART_MODULE_ENABLED  */
++/* #define HAL_IRDA_MODULE_ENABLED  */
++/* #define HAL_SMARTCARD_MODULE_ENABLED  */
++/* #define HAL_SMBUS_MODULE_ENABLED  */
++/* #define HAL_WWDG_MODULE_ENABLED   */
++#define HAL_CORTEX_MODULE_ENABLED
++/* #define HAL_PCD_MODULE_ENABLED  */
+ 
+ 
+ /* ########################## Oscillator Values adaptation ####################*/
+ /**
+- * @brief Adjust the value of External High Speed oscillator (HSE) used in your application.
+- *
+- *        This value is used by the RCC HAL module to compute the system frequency
+- *        (when HSE is used as system clock source, directly or through the PLL).
+- */
+-#if !defined  (HSE_VALUE)
+-  #define HSE_VALUE    ((uint32_t)8000000) /**< Value of the External oscillator in Hz */
++  * @brief Adjust the value of External High Speed oscillator (HSE) used in your application.
++  *        This value is used by the RCC HAL module to compute the system frequency
++  *        (when HSE is used as system clock source, directly or through the PLL).  
++  */
++#if !defined  (HSE_VALUE) 
++  #define HSE_VALUE    ((uint32_t)8000000) /*!< Value of the External oscillator in Hz */
+ #endif /* HSE_VALUE */
+ 
+ #if !defined  (HSE_STARTUP_TIMEOUT)
+-  #define HSE_STARTUP_TIMEOUT    ((uint32_t)5000)   /**< Time out for HSE start up, in ms */
++  #define HSE_STARTUP_TIMEOUT    ((uint32_t)5000)   /*!< Time out for HSE start up, in ms */
+ #endif /* HSE_STARTUP_TIMEOUT */
+ 
+ /**
+- * @brief Internal Multiple Speed oscillator (MSI) default value.
+- *
+- *        This value is the default MSI range value after Reset.
+- */
++  * @brief Internal Multiple Speed oscillator (MSI) default value.
++  *        This value is the default MSI range value after Reset.
++  */
+ #if !defined  (MSI_VALUE)
+-  #define MSI_VALUE    ((uint32_t)2000000) /**< Value of the Internal oscillator in Hz*/
++  #define MSI_VALUE    ((uint32_t)2000000) /*!< Value of the Internal oscillator in Hz*/
+ #endif /* MSI_VALUE */
+ /**
+- * @brief Internal High Speed oscillator (HSI) value.
+- *
+- *        This value is used by the RCC HAL module to compute the system frequency
+- *        (when HSI is used as system clock source, directly or through the PLL).
+- */
++  * @brief Internal High Speed oscillator (HSI) value.
++  *        This value is used by the RCC HAL module to compute the system frequency
++  *        (when HSI is used as system clock source, directly or through the PLL). 
++  */
+ #if !defined  (HSI_VALUE)
+-  #define HSI_VALUE    ((uint32_t)16000000) /**< Value of the Internal oscillator in Hz*/
++  #define HSI_VALUE    ((uint32_t)16000000) /*!< Value of the Internal oscillator in Hz*/
+ #endif /* HSI_VALUE */
+ 
+ /**
+- * @brief Internal High Speed oscillator for USB (HSI48) value.
+- */
+-#if !defined  (HSI48_VALUE)
+-#define HSI48_VALUE ((uint32_t)48000000) /**< Value of the Internal High Speed oscillator for USB in Hz.
++  * @brief Internal High Speed oscillator for USB (HSI48) value.
++  */
++#if !defined  (HSI48_VALUE) 
++#define HSI48_VALUE ((uint32_t)48000000) /*!< Value of the Internal High Speed oscillator for USB in Hz.
+                                              The real value may vary depending on the variations
+                                              in voltage and temperature.  */
+ #endif /* HSI48_VALUE */
+ 
+ /**
+- * @brief Internal Low Speed oscillator (LSI) value.
+- */
+-#if !defined  (LSI_VALUE)
+- #define LSI_VALUE  ((uint32_t)37000)       /**< LSI Typical Value in Hz*/
+-#endif /* LSI_VALUE */                      /**< Value of the Internal Low Speed oscillator in Hz
++  * @brief Internal Low Speed oscillator (LSI) value.
++  */
++#if !defined  (LSI_VALUE) 
++ #define LSI_VALUE  ((uint32_t)37000)       /*!< LSI Typical Value in Hz*/
++#endif /* LSI_VALUE */                      /*!< Value of the Internal Low Speed oscillator in Hz
+                                              The real value may vary depending on the variations
+                                              in voltage and temperature.*/
+ /**
+- * @brief External Low Speed oscillator (LSE) value.
+- *
+- *        This value is used by the UART, RTC HAL module to compute the system frequency
+- */
++  * @brief External Low Speed oscillator (LSE) value.
++  *        This value is used by the UART, RTC HAL module to compute the system frequency
++  */
+ #if !defined  (LSE_VALUE)
+-  #define LSE_VALUE    ((uint32_t)32768) /**< Value of the External oscillator in Hz*/
++  #define LSE_VALUE    ((uint32_t)32768) /*!< Value of the External oscillator in Hz*/
+ #endif /* LSE_VALUE */
+ 
+-
++   
+ #if !defined  (LSE_STARTUP_TIMEOUT)
+-  #define LSE_STARTUP_TIMEOUT    ((uint32_t)5000)   /**< Time out for LSE start up, in ms */
++  #define LSE_STARTUP_TIMEOUT    ((uint32_t)5000)   /*!< Time out for LSE start up, in ms */
+ #endif /* HSE_STARTUP_TIMEOUT */
+ 
++   
+ /* Tip: To avoid modifying this file each time you need to use different HSE,
+    ===  you can define the HSE value in your toolchain compiler preprocessor. */
+ 
+ /* ########################### System Configuration ######################### */
+ /**
+- * @brief This is the HAL system configuration section
+- */
+-#define  VDD_VALUE                    ((uint32_t)3300) /**< Value of VDD in mv */
+-#define  TICK_INT_PRIORITY            (((uint32_t)1 << __NVIC_PRIO_BITS) - 1)    /**< tick interrupt priority */
+-#define  USE_RTOS                     0
+-#define  PREFETCH_ENABLE              1
++  * @brief This is the HAL system configuration section
++  */     
++#define  VDD_VALUE                    ((uint32_t)3300) /*!< Value of VDD in mv */
++#define  TICK_INT_PRIORITY            (((uint32_t)1<<__NVIC_PRIO_BITS) - 1)    /*!< tick interrupt priority */            
++#define  USE_RTOS                     0     
++#define  PREFETCH_ENABLE              1              
+ #define  PREREAD_ENABLE               0
+ #define  BUFFER_CACHE_DISABLE         0
+ 
+ /* ########################## Assert Selection ############################## */
+ /**
+- * @brief Uncomment the line below to expanse the "assert_param" macro in the
+- *        HAL drivers code
+- */
++  * @brief Uncomment the line below to expanse the "assert_param" macro in the 
++  *        HAL drivers code
++  */
+ /* #define USE_FULL_ASSERT    1 */
+ 
+ /* Includes ------------------------------------------------------------------*/
+ /**
+- * @brief Include module's header file
+- */
++  * @brief Include module's header file 
++  */
+ 
+ #ifdef HAL_RCC_MODULE_ENABLED
+   #include "stm32l0xx_hal_rcc.h"
+ #endif /* HAL_RCC_MODULE_ENABLED */
+-
++  
+ #ifdef HAL_GPIO_MODULE_ENABLED
+   #include "stm32l0xx_hal_gpio.h"
+ #endif /* HAL_GPIO_MODULE_ENABLED */
+@@ -222,7 +217,7 @@
+ #ifdef HAL_FLASH_MODULE_ENABLED
+   #include "stm32l0xx_hal_flash.h"
+ #endif /* HAL_FLASH_MODULE_ENABLED */
+-
++ 
+ #ifdef HAL_I2C_MODULE_ENABLED
+  #include "stm32l0xx_hal_i2c.h"
+ #endif /* HAL_I2C_MODULE_ENABLED */
+@@ -242,7 +237,7 @@
+ #ifdef HAL_LPTIM_MODULE_ENABLED
+ #include "stm32l0xx_hal_lptim.h"
+ #endif /* HAL_LPTIM_MODULE_ENABLED */
+-
++   
+ #ifdef HAL_PWR_MODULE_ENABLED
+  #include "stm32l0xx_hal_pwr.h"
+ #endif /* HAL_PWR_MODULE_ENABLED */
+@@ -298,16 +293,16 @@
+ /* Exported macro ------------------------------------------------------------*/
+ #ifdef  USE_FULL_ASSERT
+ /**
+- * @brief  The assert_param macro is used for function's parameters check.
+- * @param  expr: If expr is false, it calls assert_failed function
+- *         which reports the name of the source file and the source
+- *         line number of the call that failed.
+- *         If expr is true, it returns no value.
+- * @retval None
+- */
++  * @brief  The assert_param macro is used for function's parameters check.
++  * @param  expr: If expr is false, it calls assert_failed function
++  *         which reports the name of the source file and the source
++  *         line number of the call that failed. 
++  *         If expr is true, it returns no value.
++  * @retval None
++  */
+   #define assert_param(expr) ((expr) ? (void)0 : assert_failed((uint8_t *)__FILE__, __LINE__))
+ /* Exported functions ------------------------------------------------------- */
+-void assert_failed(uint8_t *file, uint32_t line);
++  void assert_failed(uint8_t* file, uint32_t line);
+ #else
+   #define assert_param(expr) ((void)0)
+ #endif /* USE_FULL_ASSERT */
+@@ -317,6 +312,7 @@
+ #endif
+ 
+ #endif /* __STM32L0xx_HAL_CONF_H__ */
++ 
+ 
+ /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+ 
+diff -uNr before/Projects/Multi/Applications/LoRa/AT_Slave/inc/stm32l0xx_hw_conf.h after/Projects/Multi/Applications/LoRa/AT_Slave/inc/stm32l0xx_hw_conf.h
+--- before/Projects/Multi/Applications/LoRa/AT_Slave/inc/stm32l0xx_hw_conf.h	1970-01-01 08:00:00.000000000 +0800
++++ after/Projects/Multi/Applications/LoRa/AT_Slave/inc/stm32l0xx_hw_conf.h	2018-05-24 16:50:56.118470900 +0800
+@@ -0,0 +1,179 @@
++/*
++ / _____)             _              | |
++( (____  _____ ____ _| |_ _____  ____| |__
++ \____ \| ___ |    (_   _) ___ |/ ___)  _ \
++ _____) ) ____| | | || |_| ____( (___| | | |
++(______/|_____)_|_|_| \__)_____)\____)_| |_|
++    (C)2013 Semtech
++
++Description: contains hardaware configuration Macros and Constants
++
++License: Revised BSD License, see LICENSE.TXT file include in the project
++
++Maintainer: Miguel Luis and Gregory Cristian
++*/
++ /******************************************************************************
++  * @file    stm32l0xx_hw_conf.h
++  * @author  MCD Application Team
++  * @version V1.1.5
++  * @date    30-March-2018
++  * @brief   contains hardaware configuration Macros and Constants
++  ******************************************************************************
++  * @attention
++  *
++  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
++  * All rights reserved.</center></h2>
++  *
++  * Redistribution and use in source and binary forms, with or without 
++  * modification, are permitted, provided that the following conditions are met:
++  *
++  * 1. Redistribution of source code must retain the above copyright notice, 
++  *    this list of conditions and the following disclaimer.
++  * 2. Redistributions in binary form must reproduce the above copyright notice,
++  *    this list of conditions and the following disclaimer in the documentation
++  *    and/or other materials provided with the distribution.
++  * 3. Neither the name of STMicroelectronics nor the names of other 
++  *    contributors to this software may be used to endorse or promote products 
++  *    derived from this software without specific written permission.
++  * 4. This software, including modifications and/or derivative works of this 
++  *    software, must execute solely and exclusively on microcontroller or
++  *    microprocessor devices manufactured by or for STMicroelectronics.
++  * 5. Redistribution and use of this software other than as permitted under 
++  *    this license is void and will automatically terminate your rights under 
++  *    this license. 
++  *
++  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
++  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
++  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
++  * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
++  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
++  * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
++  * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
++  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
++  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
++  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
++  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
++  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++  *
++  ******************************************************************************
++  */
++
++/* Define to prevent recursive inclusion -------------------------------------*/
++#ifndef __HW_CONF_L0_H__
++#define __HW_CONF_L0_H__
++
++#ifdef __cplusplus
++ extern "C" {
++#endif
++
++/* Includes ------------------------------------------------------------------*/
++/* Exported types ------------------------------------------------------------*/
++/* Exported constants --------------------------------------------------------*/
++
++//#define RADIO_DIO_4
++//#define RADIO_DIO_5
++
++/* LORA I/O definition for I-NUCLEO-LRWAN */
++
++
++#define RADIO_RESET_PORT                          GPIOA
++#define RADIO_RESET_PIN                           GPIO_PIN_9
++
++#define RADIO_MOSI_PORT                           GPIOA
++#define RADIO_MOSI_PIN                            GPIO_PIN_12
++
++#define RADIO_MISO_PORT                           GPIOB
++#define RADIO_MISO_PIN                            GPIO_PIN_4
++
++#define RADIO_SCLK_PORT                           GPIOB
++#define RADIO_SCLK_PIN                            GPIO_PIN_3
++
++#define RADIO_NSS_PORT                            GPIOA
++#define RADIO_NSS_PIN                             GPIO_PIN_15
++
++#define RADIO_DIO_0_PORT                          GPIOA
++#define RADIO_DIO_0_PIN                           GPIO_PIN_2
++
++#define RADIO_DIO_1_PORT                          GPIOA
++#define RADIO_DIO_1_PIN                           GPIO_PIN_3
++
++#define RADIO_DIO_2_PORT                          GPIOA
++#define RADIO_DIO_2_PIN                           GPIO_PIN_5
++
++#define RADIO_DIO_3_PORT                          GPIOA
++#define RADIO_DIO_3_PIN                           GPIO_PIN_6
++
++#ifdef RADIO_DIO_4 
++#define RADIO_DIO_4_PORT                          GPIOA
++#define RADIO_DIO_4_PIN                           GPIO_PIN_10
++#endif
++
++#ifdef RADIO_DIO_5 
++#define RADIO_DIO_5_PORT                          GPIOC
++#define RADIO_DIO_5_PIN                           GPIO_PIN_13
++#endif
++
++#define RADIO_ANT_SWITCH_PORT                     GPIOA
++#define RADIO_ANT_SWITCH_PIN                      GPIO_PIN_4
++
++#define RADIO_ANT2_SWITCH_PORT                     GPIOB        
++#define RADIO_ANT2_SWITCH_PIN                      GPIO_PIN_8   
++
++
++#define BAT_LEVEL_PORT                            GPIOA
++#define BAT_LEVEL_PIN                             GPIO_PIN_4
++/*  SPI MACRO redefinition */
++
++#define SPI_CLK_ENABLE()                __HAL_RCC_SPI1_CLK_ENABLE()
++
++#define SPI1_AF                          GPIO_AF0_SPI1  
++
++/* ADC MACRO redefinition */
++
++#ifdef USE_STM32L0XX_NUCLEO
++#define ADC_READ_CHANNEL                 ADC_CHANNEL_4
++#define ADCCLK_ENABLE()                 __HAL_RCC_ADC1_CLK_ENABLE() ;
++#define ADCCLK_DISABLE()                __HAL_RCC_ADC1_CLK_DISABLE() ;
++#endif
++
++
++/* --------------------------- RTC HW definition -------------------------------- */
++
++#define RTC_OUTPUT       DBG_RTC_OUTPUT
++
++#define RTC_Alarm_IRQn              RTC_IRQn
++/* --------------------------- USART HW definition -------------------------------*/
++
++
++#define USARTX                           USART2
++#define USARTX_CLK_ENABLE()              __USART2_CLK_ENABLE();
++#define USARTX_RX_GPIO_CLK_ENABLE()      __GPIOA_CLK_ENABLE()
++#define USARTX_TX_GPIO_CLK_ENABLE()      __GPIOA_CLK_ENABLE() 
++
++#define USARTX_FORCE_RESET()             __USART2_FORCE_RESET()
++#define USARTX_RELEASE_RESET()           __USART2_RELEASE_RESET()
++
++
++#define USARTX_TX_PIN                  GPIO_PIN_14
++#define USARTX_TX_GPIO_PORT            GPIOA  
++#define USARTX_TX_AF                   GPIO_AF4_USART2
++#define USARTX_RX_PIN                  GPIO_PIN_1
++#define USARTX_RX_GPIO_PORT            GPIOA 
++#define USARTX_RX_AF                   GPIO_AF4_USART2
++
++/* Definition for USARTx's NVIC */
++#define USARTX_IRQn                      USART2_IRQn
++#define USARTX_IRQHandler                USART2_IRQHandler
++
++
++#define LED_Toggle( x )
++#define LED_On( x )
++#define LED_Off( x )
++
++#ifdef __cplusplus
++}
++#endif
++
++#endif /* __HW_CONF_L0_H__ */
++
++/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+diff -uNr before/Projects/Multi/Applications/LoRa/AT_Slave/inc/vcom.h after/Projects/Multi/Applications/LoRa/AT_Slave/inc/vcom.h
+--- before/Projects/Multi/Applications/LoRa/AT_Slave/inc/vcom.h	2018-03-29 20:39:59.047744700 +0800
++++ after/Projects/Multi/Applications/LoRa/AT_Slave/inc/vcom.h	2018-05-28 00:14:20.811973900 +0800
+@@ -150,7 +150,7 @@
+ void vcom_Dma_IRQHandler( void );
+ 
+ /* Exported macros -----------------------------------------------------------*/
+-#if 0
++#if 1
+ #define PRINTF(...)     vcom_Send(__VA_ARGS__)
+ #define AT_PRINTF(...)     vcom_Send(__VA_ARGS__)
+ #else
+diff -uNr before/Projects/Multi/Applications/LoRa/AT_Slave/MDK-ARM/B-L072Z-LRWAN1/Lora.uvoptx after/Projects/Multi/Applications/LoRa/AT_Slave/MDK-ARM/B-L072Z-LRWAN1/Lora.uvoptx
+--- before/Projects/Multi/Applications/LoRa/AT_Slave/MDK-ARM/B-L072Z-LRWAN1/Lora.uvoptx	2018-03-29 20:39:58.886728600 +0800
++++ after/Projects/Multi/Applications/LoRa/AT_Slave/MDK-ARM/B-L072Z-LRWAN1/Lora.uvoptx	2018-05-28 12:41:50.946137300 +0800
+@@ -73,7 +73,7 @@
+         <LExpSel>0</LExpSel>
+       </OPTXL>
+       <OPTFL>
+-        <tvExp>0</tvExp>
++        <tvExp>1</tvExp>
+         <tvExpOptDlg>0</tvExpOptDlg>
+         <IsCurrentTarget>1</IsCurrentTarget>
+       </OPTFL>
+@@ -101,7 +101,7 @@
+         <sRunDeb>0</sRunDeb>
+         <sLrtime>0</sLrtime>
+         <bEvRecOn>1</bEvRecOn>
+-        <nTsel>11</nTsel>
++        <nTsel>5</nTsel>
+         <sDll></sDll>
+         <sDllPa></sDllPa>
+         <sDlgDll></sDlgDll>
+@@ -159,11 +159,16 @@
+       <LintExecutable></LintExecutable>
+       <LintConfigFile></LintConfigFile>
+       <bLintAuto>0</bLintAuto>
+-      <Lin2Executable></Lin2Executable>
+-      <Lin2ConfigFile></Lin2ConfigFile>
+-      <bLin2Auto>0</bLin2Auto>
+       <bAutoGenD>0</bAutoGenD>
+-      <bAuto2GenD>0</bAuto2GenD>
++      <LntExFlags>0</LntExFlags>
++      <pMisraName></pMisraName>
++      <pszMrule></pszMrule>
++      <pSingCmds></pSingCmds>
++      <pMultCmds></pMultCmds>
++      <pMisraNamep></pMisraNamep>
++      <pszMrulep></pszMrulep>
++      <pSingCmdsp></pSingCmdsp>
++      <pMultCmdsp></pMultCmdsp>
+     </TargetOption>
+   </Target>
+ 
+@@ -189,7 +194,7 @@
+ 
+   <Group>
+     <GroupName>Drivers/BSP/Components</GroupName>
+-    <tvExp>0</tvExp>
++    <tvExp>1</tvExp>
+     <tvExpOptDlg>0</tvExpOptDlg>
+     <cbSel>0</cbSel>
+     <RteFlg>0</RteFlg>
+@@ -200,8 +205,8 @@
+       <tvExp>0</tvExp>
+       <tvExpOptDlg>0</tvExpOptDlg>
+       <bDave2>0</bDave2>
+-      <PathWithFileName>..\..\..\..\..\..\..\Drivers\BSP\Components\sx1276\sx1276.c</PathWithFileName>
+-      <FilenameWithoutPath>sx1276.c</FilenameWithoutPath>
++      <PathWithFileName>..\..\..\..\..\..\..\Drivers\BSP\Components\sx1272\sx1272.c</PathWithFileName>
++      <FilenameWithoutPath>sx1272.c</FilenameWithoutPath>
+       <RteFlg>0</RteFlg>
+       <bShared>0</bShared>
+     </File>
+@@ -209,7 +214,7 @@
+ 
+   <Group>
+     <GroupName>Drivers/BSP/MLM32L0X01</GroupName>
+-    <tvExp>0</tvExp>
++    <tvExp>1</tvExp>
+     <tvExpOptDlg>0</tvExpOptDlg>
+     <cbSel>0</cbSel>
+     <RteFlg>0</RteFlg>
+@@ -220,8 +225,8 @@
+       <tvExp>0</tvExp>
+       <tvExpOptDlg>0</tvExpOptDlg>
+       <bDave2>0</bDave2>
+-      <PathWithFileName>..\..\..\..\..\..\..\Drivers\BSP\MLM32L07X01\mlm32l07x01.c</PathWithFileName>
+-      <FilenameWithoutPath>mlm32l07x01.c</FilenameWithoutPath>
++      <PathWithFileName>..\..\..\..\..\..\..\Drivers\BSP\sx1272mb2das\sx1272mb2das.c</PathWithFileName>
++      <FilenameWithoutPath>sx1272mb2das.c</FilenameWithoutPath>
+       <RteFlg>0</RteFlg>
+       <bShared>0</bShared>
+     </File>
+@@ -376,8 +381,8 @@
+       <tvExp>0</tvExp>
+       <tvExpOptDlg>0</tvExpOptDlg>
+       <bDave2>0</bDave2>
+-      <PathWithFileName>.\startup_stm32l072xx.s</PathWithFileName>
+-      <FilenameWithoutPath>startup_stm32l072xx.s</FilenameWithoutPath>
++      <PathWithFileName>.\startup_stm32l053xx.s</PathWithFileName>
++      <FilenameWithoutPath>startup_stm32l053xx.s</FilenameWithoutPath>
+       <RteFlg>0</RteFlg>
+       <bShared>0</bShared>
+     </File>
+@@ -385,7 +390,7 @@
+ 
+   <Group>
+     <GroupName>Projects/AT_Slave</GroupName>
+-    <tvExp>0</tvExp>
++    <tvExp>1</tvExp>
+     <tvExpOptDlg>0</tvExpOptDlg>
+     <cbSel>0</cbSel>
+     <RteFlg>0</RteFlg>
+@@ -561,7 +566,7 @@
+ 
+   <Group>
+     <GroupName>Middlewares/Lora/Mac</GroupName>
+-    <tvExp>0</tvExp>
++    <tvExp>1</tvExp>
+     <tvExpOptDlg>0</tvExpOptDlg>
+     <cbSel>0</cbSel>
+     <RteFlg>0</RteFlg>
+@@ -749,7 +754,7 @@
+ 
+   <Group>
+     <GroupName>Middlewares/Lora/Utilities</GroupName>
+-    <tvExp>0</tvExp>
++    <tvExp>1</tvExp>
+     <tvExpOptDlg>0</tvExpOptDlg>
+     <cbSel>0</cbSel>
+     <RteFlg>0</RteFlg>
+@@ -805,7 +810,7 @@
+ 
+   <Group>
+     <GroupName>Middlewares/Lora/Crypto</GroupName>
+-    <tvExp>0</tvExp>
++    <tvExp>1</tvExp>
+     <tvExpOptDlg>0</tvExpOptDlg>
+     <cbSel>0</cbSel>
+     <RteFlg>0</RteFlg>
+diff -uNr before/Projects/Multi/Applications/LoRa/AT_Slave/MDK-ARM/B-L072Z-LRWAN1/Lora.uvprojx after/Projects/Multi/Applications/LoRa/AT_Slave/MDK-ARM/B-L072Z-LRWAN1/Lora.uvprojx
+--- before/Projects/Multi/Applications/LoRa/AT_Slave/MDK-ARM/B-L072Z-LRWAN1/Lora.uvprojx	2018-03-29 20:39:59.014741400 +0800
++++ after/Projects/Multi/Applications/LoRa/AT_Slave/MDK-ARM/B-L072Z-LRWAN1/Lora.uvprojx	2018-05-28 14:19:05.788871200 +0800
+@@ -10,7 +10,8 @@
+       <TargetName>mlm32l07x01</TargetName>
+       <ToolsetNumber>0x4</ToolsetNumber>
+       <ToolsetName>ARM-ADS</ToolsetName>
+-      <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
++      <pCCUsed>5060528::V5.06 update 5 (build 528)::ARMCC</pCCUsed>
++      <uAC6>0</uAC6>
+       <TargetOption>
+         <TargetCommonOption>
+           <Device>STM32L072CZYx</Device>
+@@ -333,9 +334,9 @@
+             <v6Rtti>0</v6Rtti>
+             <VariousControls>
+               <MiscControls>--C99</MiscControls>
+-              <Define>STM32L072xx, USE_B_L072Z_LRWAN1, USE_FULL_LL_DRIVER, REGION_EU868</Define>
++              <Define>STM32L072xx, USE_B_L072Z_LRWAN1, USE_FULL_LL_DRIVER, REGION_EU868 LOW_POWER_DISABLE</Define>
+               <Undefine></Undefine>
+-              <IncludePath>..\..\inc;..\..\..\..\..\..\..\Drivers\BSP\MLM32L07X01;..\..\..\..\..\..\..\Drivers\STM32L0xx_HAL_Driver\Inc;..\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32L0xx\Include;..\..\..\..\..\..\..\Drivers\CMSIS\Include;..\..\..\..\..\..\..\Middlewares\Third_Party\Lora\Crypto;..\..\..\..\..\..\..\Middlewares\Third_Party\Lora\Mac;..\..\..\..\..\..\..\Middlewares\Third_Party\Lora\Phy;..\..\..\..\..\..\..\Middlewares\Third_Party\Lora\Utilities;..\..\..\..\..\..\..\Drivers\BSP\X_NUCLEO_IKS01A1;..\..\..\..\..\..\..\Middlewares\Third_Party\Lora\Core;..\..\..\..\..\..\..\Drivers\BSP\Components\Common;..\..\..\..\..\..\..\Drivers\BSP\Components\hts221;..\..\..\..\..\..\..\Drivers\BSP\Components\lps22hb;..\..\..\..\..\..\..\Drivers\BSP\Components\lps25hb;..\..\..\..\..\..\..\Drivers\BSP\Components\sx1276;..\..\..\..\..\..\..\Drivers\BSP\B-L072Z-LRWAN1</IncludePath>
++              <IncludePath>..\..\inc;..\..\..\..\..\..\..\Drivers\BSP\MLM32L07X01;..\..\..\..\..\..\..\Drivers\STM32L0xx_HAL_Driver\Inc;..\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32L0xx\Include;..\..\..\..\..\..\..\Drivers\CMSIS\Include;..\..\..\..\..\..\..\Middlewares\Third_Party\Lora\Crypto;..\..\..\..\..\..\..\Middlewares\Third_Party\Lora\Mac;..\..\..\..\..\..\..\Middlewares\Third_Party\Lora\Phy;..\..\..\..\..\..\..\Middlewares\Third_Party\Lora\Utilities;..\..\..\..\..\..\..\Drivers\BSP\X_NUCLEO_IKS01A1;..\..\..\..\..\..\..\Middlewares\Third_Party\Lora\Core;..\..\..\..\..\..\..\Drivers\BSP\Components\Common;..\..\..\..\..\..\..\Drivers\BSP\Components\hts221;..\..\..\..\..\..\..\Drivers\BSP\Components\lps22hb;..\..\..\..\..\..\..\Drivers\BSP\Components\lps25hb;..\..\..\..\..\..\..\Drivers\BSP\Components\sx1276;..\..\..\..\..\..\..\Drivers\BSP\B-L072Z-LRWAN1;..\..\..\..\..\..\..\Drivers\BSP\sx1272mb2das;..\..\..\..\..\..\..\Drivers\BSP\Components\sx1272</IncludePath>
+             </VariousControls>
+           </Cads>
+           <Aads>
+@@ -390,9 +391,9 @@
+           <GroupName>Drivers/BSP/Components</GroupName>
+           <Files>
+             <File>
+-              <FileName>sx1276.c</FileName>
++              <FileName>sx1272.c</FileName>
+               <FileType>1</FileType>
+-              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\Components\sx1276\sx1276.c</FilePath>
++              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\Components\sx1272\sx1272.c</FilePath>
+             </File>
+           </Files>
+         </Group>
+@@ -400,9 +401,9 @@
+           <GroupName>Drivers/BSP/MLM32L0X01</GroupName>
+           <Files>
+             <File>
+-              <FileName>mlm32l07x01.c</FileName>
++              <FileName>sx1272mb2das.c</FileName>
+               <FileType>1</FileType>
+-              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\MLM32L07X01\mlm32l07x01.c</FilePath>
++              <FilePath>..\..\..\..\..\..\..\Drivers\BSP\sx1272mb2das\sx1272mb2das.c</FilePath>
+             </File>
+           </Files>
+         </Group>
+@@ -470,9 +471,9 @@
+           <GroupName>Projects/MDK-ARM</GroupName>
+           <Files>
+             <File>
+-              <FileName>startup_stm32l072xx.s</FileName>
++              <FileName>startup_stm32l053xx.s</FileName>
+               <FileType>2</FileType>
+-              <FilePath>.\startup_stm32l072xx.s</FilePath>
++              <FilePath>.\startup_stm32l053xx.s</FilePath>
+             </File>
+           </Files>
+         </Group>
+@@ -675,4 +676,10 @@
+     </Target>
+   </Targets>
+ 
++  <RTE>
++    <apis/>
++    <components/>
++    <files/>
++  </RTE>
++
+ </Project>
+diff -uNr before/Projects/Multi/Applications/LoRa/AT_Slave/MDK-ARM/B-L072Z-LRWAN1/startup_stm32l053xx.s after/Projects/Multi/Applications/LoRa/AT_Slave/MDK-ARM/B-L072Z-LRWAN1/startup_stm32l053xx.s
+--- before/Projects/Multi/Applications/LoRa/AT_Slave/MDK-ARM/B-L072Z-LRWAN1/startup_stm32l053xx.s	1970-01-01 08:00:00.000000000 +0800
++++ after/Projects/Multi/Applications/LoRa/AT_Slave/MDK-ARM/B-L072Z-LRWAN1/startup_stm32l053xx.s	2018-03-29 20:39:53.057145700 +0800
+@@ -0,0 +1,261 @@
++;******************** (C) COPYRIGHT 2015 STMicroelectronics ********************
++;* File Name          : startup_stm32l053xx.s
++;* Author             : MCD Application Team
++;* Version            : V1.6.0
++;* Date               : 15-April-2016
++;* Description        : STM32l053xx Devices vector table for MDK-ARM toolchain.
++;*                      This module performs:
++;*                      - Set the initial SP
++;*                      - Set the initial PC == Reset_Handler
++;*                      - Set the vector table entries with the exceptions ISR address
++;*                      - Branches to __main in the C library (which eventually
++;*                        calls main()).
++;*                      After Reset the Cortex-M0+ processor is in Thread mode,
++;*                      priority is Privileged, and the Stack is set to Main.
++;* <<< Use Configuration Wizard in Context Menu >>>   
++;*******************************************************************************
++;* 
++;* Redistribution and use in source and binary forms, with or without modification,
++;* are permitted provided that the following conditions are met:
++;*   1. Redistributions of source code must retain the above copyright notice,
++;*      this list of conditions and the following disclaimer.
++;*   2. Redistributions in binary form must reproduce the above copyright notice,
++;*      this list of conditions and the following disclaimer in the documentation
++;*      and/or other materials provided with the distribution.
++;*   3. Neither the name of STMicroelectronics nor the names of its contributors
++;*      may be used to endorse or promote products derived from this software
++;*      without specific prior written permission.
++;*
++;* THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
++;* AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
++;* IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
++;* DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
++;* FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
++;* DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
++;* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
++;* CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
++;* OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
++;* OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++;*
++;*******************************************************************************
++;
++; Amount of memory (in bytes) allocated for Stack
++; Tailor this value to your application needs
++; <h> Stack Configuration
++;   <o> Stack Size (in Bytes) <0x0-0xFFFFFFFF:8>
++; </h>
++
++Stack_Size      EQU     0x00000400
++
++                AREA    STACK, NOINIT, READWRITE, ALIGN=3
++Stack_Mem       SPACE   Stack_Size
++__initial_sp
++
++
++; <h> Heap Configuration
++;   <o>  Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
++; </h>
++
++Heap_Size       EQU     0x00000200
++
++                AREA    HEAP, NOINIT, READWRITE, ALIGN=3
++__heap_base
++Heap_Mem        SPACE   Heap_Size
++__heap_limit
++
++                PRESERVE8
++                THUMB
++
++
++; Vector Table Mapped to Address 0 at Reset
++                AREA    RESET, DATA, READONLY
++                EXPORT  __Vectors
++                EXPORT  __Vectors_End
++                EXPORT  __Vectors_Size
++
++__Vectors       DCD     __initial_sp              ; Top of Stack
++                DCD     Reset_Handler             ; Reset Handler
++                DCD     NMI_Handler               ; NMI Handler
++                DCD     HardFault_Handler         ; Hard Fault Handler
++                DCD     0                         ; Reserved
++                DCD     0                         ; Reserved
++                DCD     0                         ; Reserved
++                DCD     0                         ; Reserved
++                DCD     0                         ; Reserved
++                DCD     0                         ; Reserved
++                DCD     0                         ; Reserved
++                DCD     SVC_Handler               ; SVCall Handler
++                DCD     0                         ; Reserved
++                DCD     0                         ; Reserved
++                DCD     PendSV_Handler            ; PendSV Handler
++                DCD     SysTick_Handler           ; SysTick Handler
++
++                ; External Interrupts
++                DCD     WWDG_IRQHandler                ; Window Watchdog
++                DCD     PVD_IRQHandler                 ; PVD through EXTI Line detect
++                DCD     RTC_IRQHandler                 ; RTC through EXTI Line
++                DCD     FLASH_IRQHandler               ; FLASH
++                DCD     RCC_CRS_IRQHandler             ; RCC and CRS
++                DCD     EXTI0_1_IRQHandler             ; EXTI Line 0 and 1
++                DCD     EXTI2_3_IRQHandler             ; EXTI Line 2 and 3
++                DCD     EXTI4_15_IRQHandler            ; EXTI Line 4 to 15
++                DCD     TSC_IRQHandler                 ; TSC
++                DCD     DMA1_Channel1_IRQHandler       ; DMA1 Channel 1
++                DCD     DMA1_Channel2_3_IRQHandler     ; DMA1 Channel 2 and Channel 3
++                DCD     DMA1_Channel4_5_6_7_IRQHandler ; DMA1 Channel 4, Channel 5, Channel 6 and Channel 7
++                DCD     ADC1_COMP_IRQHandler           ; ADC1, COMP1 and COMP2 
++                DCD     LPTIM1_IRQHandler              ; LPTIM1
++                DCD     0                              ; Reserved
++                DCD     TIM2_IRQHandler                ; TIM2
++                DCD     0                              ; Reserved
++                DCD     TIM6_DAC_IRQHandler            ; TIM6 and DAC
++                DCD     0                              ; Reserved
++                DCD     0                              ; Reserved
++                DCD     TIM21_IRQHandler               ; TIM21
++                DCD     0                              ; Reserved
++                DCD     TIM22_IRQHandler               ; TIM22
++                DCD     I2C1_IRQHandler                ; I2C1
++                DCD     I2C2_IRQHandler                ; I2C2
++                DCD     SPI1_IRQHandler                ; SPI1
++                DCD     SPI2_IRQHandler                ; SPI2
++                DCD     USART1_IRQHandler              ; USART1
++                DCD     USART2_IRQHandler              ; USART2
++                DCD     RNG_LPUART1_IRQHandler         ; RNG and LPUART1
++                DCD     LCD_IRQHandler                 ; LCD
++                DCD     USB_IRQHandler                 ; USB
++                
++__Vectors_End
++
++__Vectors_Size  EQU  __Vectors_End - __Vectors
++
++                AREA    |.text|, CODE, READONLY
++
++; Reset handler routine
++Reset_Handler    PROC
++                 EXPORT  Reset_Handler                 [WEAK]
++        IMPORT  __main
++        IMPORT  SystemInit  
++                 LDR     R0, =SystemInit
++                 BLX     R0
++                 LDR     R0, =__main
++                 BX      R0
++                 ENDP
++
++; Dummy Exception Handlers (infinite loops which can be modified)
++
++NMI_Handler     PROC
++                EXPORT  NMI_Handler                    [WEAK]
++                B       .
++                ENDP
++HardFault_Handler\
++                PROC
++                EXPORT  HardFault_Handler              [WEAK]
++                B       .
++                ENDP
++SVC_Handler     PROC
++                EXPORT  SVC_Handler                    [WEAK]
++                B       .
++                ENDP
++PendSV_Handler  PROC
++                EXPORT  PendSV_Handler                 [WEAK]
++                B       .
++                ENDP
++SysTick_Handler PROC
++                EXPORT  SysTick_Handler                [WEAK]
++                B       .
++                ENDP
++
++Default_Handler PROC
++
++                EXPORT  WWDG_IRQHandler                [WEAK]
++                EXPORT  PVD_IRQHandler                 [WEAK]
++                EXPORT  RTC_IRQHandler                 [WEAK]
++                EXPORT  FLASH_IRQHandler               [WEAK]
++                EXPORT  RCC_CRS_IRQHandler             [WEAK]
++                EXPORT  EXTI0_1_IRQHandler             [WEAK]
++                EXPORT  EXTI2_3_IRQHandler             [WEAK]
++                EXPORT  EXTI4_15_IRQHandler            [WEAK]
++                EXPORT  TSC_IRQHandler                  [WEAK]
++                EXPORT  DMA1_Channel1_IRQHandler       [WEAK]
++                EXPORT  DMA1_Channel2_3_IRQHandler     [WEAK]
++                EXPORT  DMA1_Channel4_5_6_7_IRQHandler [WEAK]
++                EXPORT  ADC1_COMP_IRQHandler           [WEAK]
++                EXPORT  LPTIM1_IRQHandler              [WEAK]
++                EXPORT  TIM2_IRQHandler                [WEAK]
++                EXPORT  TIM6_DAC_IRQHandler            [WEAK]
++                EXPORT  TIM21_IRQHandler               [WEAK]
++                EXPORT  TIM22_IRQHandler               [WEAK]
++                EXPORT  I2C1_IRQHandler                [WEAK]
++                EXPORT  I2C2_IRQHandler                [WEAK]
++                EXPORT  SPI1_IRQHandler                [WEAK]
++                EXPORT  SPI2_IRQHandler                [WEAK]
++                EXPORT  USART1_IRQHandler              [WEAK]
++                EXPORT  USART2_IRQHandler              [WEAK]
++                EXPORT  RNG_LPUART1_IRQHandler         [WEAK]
++                EXPORT  LCD_IRQHandler                 [WEAK]
++                EXPORT  USB_IRQHandler                 [WEAK]
++
++
++WWDG_IRQHandler
++PVD_IRQHandler
++RTC_IRQHandler
++FLASH_IRQHandler
++RCC_CRS_IRQHandler
++EXTI0_1_IRQHandler
++EXTI2_3_IRQHandler
++EXTI4_15_IRQHandler
++TSC_IRQHandler
++DMA1_Channel1_IRQHandler
++DMA1_Channel2_3_IRQHandler
++DMA1_Channel4_5_6_7_IRQHandler
++ADC1_COMP_IRQHandler 
++LPTIM1_IRQHandler
++TIM2_IRQHandler
++TIM6_DAC_IRQHandler
++TIM21_IRQHandler
++TIM22_IRQHandler
++I2C1_IRQHandler
++I2C2_IRQHandler
++SPI1_IRQHandler
++SPI2_IRQHandler
++USART1_IRQHandler
++USART2_IRQHandler
++RNG_LPUART1_IRQHandler
++LCD_IRQHandler
++USB_IRQHandler
++
++                B       .
++
++                ENDP
++
++                ALIGN
++
++;*******************************************************************************
++; User Stack and Heap initialization
++;*******************************************************************************
++                 IF      :DEF:__MICROLIB
++                
++                 EXPORT  __initial_sp
++                 EXPORT  __heap_base
++                 EXPORT  __heap_limit
++                
++                 ELSE
++                
++                 IMPORT  __use_two_region_memory
++                 EXPORT  __user_initial_stackheap
++                 
++__user_initial_stackheap
++
++                 LDR     R0, =  Heap_Mem
++                 LDR     R1, =(Stack_Mem + Stack_Size)
++                 LDR     R2, = (Heap_Mem +  Heap_Size)
++                 LDR     R3, = Stack_Mem
++                 BX      LR
++
++                 ALIGN
++
++                 ENDIF
++
++                 END
++
++;************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE*****
+diff -uNr before/Projects/Multi/Applications/LoRa/AT_Slave/src/command.c after/Projects/Multi/Applications/LoRa/AT_Slave/src/command.c
+--- before/Projects/Multi/Applications/LoRa/AT_Slave/src/command.c	2018-03-29 20:39:59.005740500 +0800
++++ after/Projects/Multi/Applications/LoRa/AT_Slave/src/command.c	2018-05-28 00:20:03.708586400 +0800
+@@ -602,7 +602,7 @@
+   {
+     command[i] = GetNewChar();
+ 
+-#if 0 /* echo On    */
++#if 1 /* echo On    */
+     PRINTF("%c", command[i]);
+ #endif
+ 
+diff -uNr before/Projects/Multi/Applications/LoRa/AT_Slave/src/test_rf.c after/Projects/Multi/Applications/LoRa/AT_Slave/src/test_rf.c
+--- before/Projects/Multi/Applications/LoRa/AT_Slave/src/test_rf.c	2018-03-29 20:39:58.957735700 +0800
++++ after/Projects/Multi/Applications/LoRa/AT_Slave/src/test_rf.c	2018-05-28 11:46:35.020477200 +0800
+@@ -48,12 +48,14 @@
+ #include "vcom.h"
+ #include <stdarg.h>
+ #include "radio.h"
+-#include "sx1276.h"
+-#include "mlm32l07x01.h"
++#include "sx1272.h"
++#include "stm32l0xx_hal_conf.h"
++
+ #include "at.h"
+ #include "test_rf.h"
+ #include "tiny_sscanf.h"
+ 
++extern void SX1272SetOpMode( uint8_t opMode );
+ 
+ /* Private typedef -----------------------------------------------------------*/
+   typedef struct
+@@ -133,7 +135,7 @@
+ 
+     PRINTF("Tx Test\n\r");
+     
+-    SX1276SetModem( MODEM_FSK );
++		Radio.SetModem( MODEM_FSK );   // SX1276SetModem( MODEM_FSK );
+   
+     Radio.SetChannel( loraParam.freqMHz * 1000000 );
+         
+@@ -202,7 +204,9 @@
+       default:
+         break;
+     }  
+-    SX1276SetOpMode( RF_OPMODE_TRANSMITTER );
++
++		SX1272SetOpMode( RF_OPMODE_TRANSMITTER );  // SX1276SetOpMode( RF_OPMODE_TRANSMITTER ); 
++		
+     return AT_OK;
+   }
+   else
+@@ -222,7 +226,8 @@
+     TestState |= RX_TEST_RSSI;
+     PRINTF("Rx Test\n\r");  
+     
+-     SX1276SetModem( MODEM_FSK );
++		Radio.SetModem( MODEM_FSK );   // SX1276SetModem( MODEM_FSK );
++		
+   
+     Radio.SetChannel( loraParam.freqMHz * 1000000 );
+ 
+@@ -248,7 +253,7 @@
+ 
+     Radio.Write( REG_RSSICONFIG, 0x07 );//256 samples average
+ 
+-    SX1276SetOpMode( RF_OPMODE_RECEIVER );
++    SX1272SetOpMode( RF_OPMODE_RECEIVER );  // SX1276SetOpMode( RF_OPMODE_RECEIVER ); 		
+ 
+     Radio.Write( REG_RXCONFIG, 0x40  ); //Triggers a manual Restart of the Receiver chain
+     
+@@ -362,7 +367,7 @@
+   
+   PRINTF("Test Stop\n\r");
+   /* Set the radio in standBy*/
+-  SX1276SetOpMode( RF_OPMODE_SLEEP );
++  SX1272SetOpMode( RF_OPMODE_SLEEP );  // SX1276SetOpMode( RF_OPMODE_SLEEP );
+   
+   return AT_OK;
+ }
+diff -uNr before/Projects/Multi/Applications/LoRa/AT_Slave/src/vcom.c after/Projects/Multi/Applications/LoRa/AT_Slave/src/vcom.c
+--- before/Projects/Multi/Applications/LoRa/AT_Slave/src/vcom.c	2018-03-29 20:39:58.774717400 +0800
++++ after/Projects/Multi/Applications/LoRa/AT_Slave/src/vcom.c	2018-05-27 23:57:51.245373900 +0800
+@@ -128,7 +128,7 @@
+   HAL_NVIC_SetPriority(UARTX_IRQn, IRQ_PRIORITY_USARTX, 0);
+   HAL_NVIC_EnableIRQ(UARTX_IRQn);
+ 
+-  LPUART_InitStruct.BaudRate = 9600;
++  LPUART_InitStruct.BaudRate = 115200;
+   LPUART_InitStruct.DataWidth = LL_LPUART_DATAWIDTH_8B;
+   LPUART_InitStruct.StopBits = LL_LPUART_STOPBITS_1;
+   LPUART_InitStruct.Parity = LL_LPUART_PARITY_NONE;
 diff -uNr before/Projects/Multi/Applications/LoRa/End_Node/inc/stm32l0xx_hw_conf.h after/Projects/Multi/Applications/LoRa/End_Node/inc/stm32l0xx_hw_conf.h
 --- before/Projects/Multi/Applications/LoRa/End_Node/inc/stm32l0xx_hw_conf.h	2018-03-29 20:39:55.969436900 +0800
-+++ after/Projects/Multi/Applications/LoRa/End_Node/inc/stm32l0xx_hw_conf.h	2018-05-24 13:48:27.606251800 +0800
++++ after/Projects/Multi/Applications/LoRa/End_Node/inc/stm32l0xx_hw_conf.h	2018-05-24 16:50:56.118470900 +0800
 @@ -73,48 +73,52 @@
  //#define RADIO_DIO_4
  //#define RADIO_DIO_5
@@ -259,370 +1444,4 @@ diff -uNr before/Projects/Multi/Applications/LoRa/End_Node/inc/stm32l0xx_hw_conf
  #define USARTX_RX_GPIO_PORT            GPIOA 
  #define USARTX_RX_AF                   GPIO_AF4_USART2
  
-diff -uNr before/Projects/Multi/Applications/LoRa/End_Node/MDK-ARM/STM32L053R8-Nucleo/Lora.uvoptx after/Projects/Multi/Applications/LoRa/End_Node/MDK-ARM/STM32L053R8-Nucleo/Lora.uvoptx
---- before/Projects/Multi/Applications/LoRa/End_Node/MDK-ARM/STM32L053R8-Nucleo/Lora.uvoptx	2018-03-29 20:39:56.735513500 +0800
-+++ after/Projects/Multi/Applications/LoRa/End_Node/MDK-ARM/STM32L053R8-Nucleo/Lora.uvoptx	2018-05-24 12:43:15.019464600 +0800
-@@ -73,63 +73,11 @@
-         <LExpSel>0</LExpSel>
-       </OPTXL>
-       <OPTFL>
--        <tvExp>0</tvExp>
-+        <tvExp>1</tvExp>
-         <tvExpOptDlg>0</tvExpOptDlg>
--        <IsCurrentTarget>1</IsCurrentTarget>
-+        <IsCurrentTarget>0</IsCurrentTarget>
-       </OPTFL>
-       <CpuCode>18</CpuCode>
--      <Books>
--        <Book>
--          <Number>0</Number>
--          <Title>User Manual (STM32L053-Discovery)</Title>
--          <Path>C:\Keil_v5\ARM\PACK\Keil\STM32L0xx_DFP\1.6.0\Boards\ST\STM32L053-Discovery\Documents\DM00118944.pdf</Path>
--        </Book>
--        <Book>
--          <Number>1</Number>
--          <Title>Data Brief (STM32L053-Discovery)</Title>
--          <Path>C:\Keil_v5\ARM\PACK\Keil\STM32L0xx_DFP\1.6.0\Boards\ST\STM32L053-Discovery\Documents\DM00122138.pdf</Path>
--        </Book>
--        <Book>
--          <Number>2</Number>
--          <Title>Schematics (STM32L053-Discovery)</Title>
--          <Path>C:\Keil_v5\ARM\PACK\Keil\STM32L0xx_DFP\1.6.0\Boards\ST\STM32L053-Discovery\Documents\MB1143.pdf</Path>
--        </Book>
--        <Book>
--          <Number>3</Number>
--          <Title>User Manual (NUCLEO-L053R8)</Title>
--          <Path>C:\Keil_v5\ARM\PACK\Keil\STM32NUCLEO_BSP\1.6.0\Documents\DM00105823.pdf</Path>
--        </Book>
--        <Book>
--          <Number>4</Number>
--          <Title>Overview (NUCLEO-L053R8)</Title>
--          <Path>C:\Keil_v5\ARM\PACK\Keil\STM32NUCLEO_BSP\1.6.0\Documents\DM00105918.pdf</Path>
--        </Book>
--        <Book>
--          <Number>5</Number>
--          <Title>Getting started (NUCLEO-L053R8)</Title>
--          <Path>C:\Keil_v5\ARM\PACK\Keil\STM32NUCLEO_BSP\1.6.0\Documents\DM00105928.pdf</Path>
--        </Book>
--        <Book>
--          <Number>6</Number>
--          <Title>Schematics (NUCLEO-L053R8)</Title>
--          <Path>C:\Keil_v5\ARM\PACK\Keil\STM32NUCLEO_BSP\1.6.0\Documents\MB1136.pdf</Path>
--        </Book>
--        <Book>
--          <Number>7</Number>
--          <Title>Quick Start Guide (NUCLEO-L053R8)</Title>
--          <Path>C:\Keil_v5\ARM\PACK\Keil\STM32NUCLEO_BSP\1.6.0\Documents\STM32L053-NUCLEO_QSG.pdf</Path>
--        </Book>
--        <Book>
--          <Number>8</Number>
--          <Title>STM32 Nucleo board (NUCLEO-L053R8)</Title>
--          <Path>http://www.st.com/web/catalog/tools/FM116/SC959/SS1532/LN1847/PF260001</Path>
--        </Book>
--        <Book>
--          <Number>9</Number>
--          <Title>STM32L053-Discovery Web Page (STM32L053-Discovery)</Title>
--          <Path>http://www.st.com/web/catalog/tools/FM116/SC959/SS1532/LN1848/PF260319</Path>
--        </Book>
--      </Books>
-       <DebugOpt>
-         <uSim>0</uSim>
-         <uTrg>1</uTrg>
-@@ -153,7 +101,7 @@
-         <sRunDeb>0</sRunDeb>
-         <sLrtime>0</sLrtime>
-         <bEvRecOn>1</bEvRecOn>
--        <nTsel>11</nTsel>
-+        <nTsel>5</nTsel>
-         <sDll></sDll>
-         <sDllPa></sDllPa>
-         <sDlgDll></sDlgDll>
-@@ -170,12 +118,12 @@
-         <SetRegEntry>
-           <Number>0</Number>
-           <Key>ST-LINKIII-KEIL_SWO</Key>
--          <Name>-U066BFF525257775087153336 -I0 -O2254 -S0 -C0 -A0 -N00("ARM CoreSight SW-DP") -D00(0BC11477) -L00(0) -TO18 -TC10000000 -TP21 -TDS8007 -TDT0 -TDC1F -TIEFFFFFFFF -TIP8 -FO7 -FD20000000 -FC1000 -FN1 -FF0STM32L0xx_64.FLM -FS08000000 -FL010000 -FP0($$Device:STM32L053R8$Flash/STM32L0xx_64.FLM)</Name>
-+          <Name>-U066BFF525257775087153336 -I0 -O2254 -S0 -C0 -A0 -N00("ARM CoreSight SW-DP") -D00(0BC11477) -L00(0) -TO18 -TC10000000 -TP21 -TDS8007 -TDT0 -TDC1F -TIEFFFFFFFF -TIP8 -FO7 -FD20000000 -FC1000 -FN1 -FF0STM32L0xx_64.FLM -FS08000000 -FL010000 -FP0($$Device:STM32L053R8Tx$Flash\STM32L0xx_64.FLM)</Name>
-         </SetRegEntry>
-         <SetRegEntry>
-           <Number>0</Number>
-           <Key>UL2CM3</Key>
--          <Name>UL2CM3(-S0 -C0 -P0 ) -FN1 -FC1000 -FD20000000 -FF0STM32L0xx_64 -FL010000 -FS08000000 -FP0($$Device:STM32L053R8Tx$Flash/STM32L0xx_64.FLM)</Name>
-+          <Name>UL2CM3(-S0 -C0 -P0 ) -FN1 -FC1000 -FD20000000 -FF0STM32L0xx_64 -FL010000 -FS08000000 -FP0($$Device:STM32L053R8Tx$Flash\STM32L0xx_64.FLM)</Name>
-         </SetRegEntry>
-       </TargetDriverDllRegistry>
-       <Breakpoint/>
-@@ -211,11 +159,16 @@
-       <LintExecutable></LintExecutable>
-       <LintConfigFile></LintConfigFile>
-       <bLintAuto>0</bLintAuto>
--      <Lin2Executable></Lin2Executable>
--      <Lin2ConfigFile></Lin2ConfigFile>
--      <bLin2Auto>0</bLin2Auto>
-       <bAutoGenD>0</bAutoGenD>
--      <bAuto2GenD>0</bAuto2GenD>
-+      <LntExFlags>0</LntExFlags>
-+      <pMisraName></pMisraName>
-+      <pszMrule></pszMrule>
-+      <pSingCmds></pSingCmds>
-+      <pMultCmds></pMultCmds>
-+      <pMisraNamep></pMisraNamep>
-+      <pszMrulep></pszMrulep>
-+      <pSingCmdsp></pSingCmdsp>
-+      <pMultCmdsp></pMultCmdsp>
-     </TargetOption>
-   </Target>
- 
-@@ -271,63 +224,11 @@
-         <LExpSel>0</LExpSel>
-       </OPTXL>
-       <OPTFL>
--        <tvExp>0</tvExp>
-+        <tvExp>1</tvExp>
-         <tvExpOptDlg>0</tvExpOptDlg>
--        <IsCurrentTarget>0</IsCurrentTarget>
-+        <IsCurrentTarget>1</IsCurrentTarget>
-       </OPTFL>
-       <CpuCode>18</CpuCode>
--      <Books>
--        <Book>
--          <Number>0</Number>
--          <Title>User Manual (STM32L053-Discovery)</Title>
--          <Path>C:\Keil_v5\ARM\PACK\Keil\STM32L0xx_DFP\1.6.0\Boards\ST\STM32L053-Discovery\Documents\DM00118944.pdf</Path>
--        </Book>
--        <Book>
--          <Number>1</Number>
--          <Title>Data Brief (STM32L053-Discovery)</Title>
--          <Path>C:\Keil_v5\ARM\PACK\Keil\STM32L0xx_DFP\1.6.0\Boards\ST\STM32L053-Discovery\Documents\DM00122138.pdf</Path>
--        </Book>
--        <Book>
--          <Number>2</Number>
--          <Title>Schematics (STM32L053-Discovery)</Title>
--          <Path>C:\Keil_v5\ARM\PACK\Keil\STM32L0xx_DFP\1.6.0\Boards\ST\STM32L053-Discovery\Documents\MB1143.pdf</Path>
--        </Book>
--        <Book>
--          <Number>3</Number>
--          <Title>User Manual (NUCLEO-L053R8)</Title>
--          <Path>C:\Keil_v5\ARM\PACK\Keil\STM32NUCLEO_BSP\1.6.0\Documents\DM00105823.pdf</Path>
--        </Book>
--        <Book>
--          <Number>4</Number>
--          <Title>Overview (NUCLEO-L053R8)</Title>
--          <Path>C:\Keil_v5\ARM\PACK\Keil\STM32NUCLEO_BSP\1.6.0\Documents\DM00105918.pdf</Path>
--        </Book>
--        <Book>
--          <Number>5</Number>
--          <Title>Getting started (NUCLEO-L053R8)</Title>
--          <Path>C:\Keil_v5\ARM\PACK\Keil\STM32NUCLEO_BSP\1.6.0\Documents\DM00105928.pdf</Path>
--        </Book>
--        <Book>
--          <Number>6</Number>
--          <Title>Schematics (NUCLEO-L053R8)</Title>
--          <Path>C:\Keil_v5\ARM\PACK\Keil\STM32NUCLEO_BSP\1.6.0\Documents\MB1136.pdf</Path>
--        </Book>
--        <Book>
--          <Number>7</Number>
--          <Title>Quick Start Guide (NUCLEO-L053R8)</Title>
--          <Path>C:\Keil_v5\ARM\PACK\Keil\STM32NUCLEO_BSP\1.6.0\Documents\STM32L053-NUCLEO_QSG.pdf</Path>
--        </Book>
--        <Book>
--          <Number>8</Number>
--          <Title>STM32 Nucleo board (NUCLEO-L053R8)</Title>
--          <Path>http://www.st.com/web/catalog/tools/FM116/SC959/SS1532/LN1847/PF260001</Path>
--        </Book>
--        <Book>
--          <Number>9</Number>
--          <Title>STM32L053-Discovery Web Page (STM32L053-Discovery)</Title>
--          <Path>http://www.st.com/web/catalog/tools/FM116/SC959/SS1532/LN1848/PF260319</Path>
--        </Book>
--      </Books>
-       <DebugOpt>
-         <uSim>0</uSim>
-         <uTrg>1</uTrg>
-@@ -351,7 +252,7 @@
-         <sRunDeb>0</sRunDeb>
-         <sLrtime>0</sLrtime>
-         <bEvRecOn>1</bEvRecOn>
--        <nTsel>11</nTsel>
-+        <nTsel>5</nTsel>
-         <sDll></sDll>
-         <sDllPa></sDllPa>
-         <sDlgDll></sDlgDll>
-@@ -368,12 +269,12 @@
-         <SetRegEntry>
-           <Number>0</Number>
-           <Key>ST-LINKIII-KEIL_SWO</Key>
--          <Name>-U066BFF525257775087153336 -I0 -O2254 -S0 -C0 -A0 -N00("ARM CoreSight SW-DP") -D00(0BC11477) -L00(0) -TO18 -TC10000000 -TP21 -TDS8007 -TDT0 -TDC1F -TIEFFFFFFFF -TIP8 -FO7 -FD20000000 -FC1000 -FN1 -FF0STM32L0xx_64.FLM -FS08000000 -FL010000 -FP0($$Device:STM32L053R8$Flash/STM32L0xx_64.FLM)</Name>
-+          <Name>-U066BFF525257775087153336 -I0 -O2254 -S0 -C0 -A0 -N00("ARM CoreSight SW-DP") -D00(0BC11477) -L00(0) -TO18 -TC10000000 -TP21 -TDS8007 -TDT0 -TDC1F -TIEFFFFFFFF -TIP8 -FO7 -FD20000000 -FC1000 -FN1 -FF0STM32L0xx_64.FLM -FS08000000 -FL010000 -FP0($$Device:STM32L053R8Tx$Flash\STM32L0xx_64.FLM)</Name>
-         </SetRegEntry>
-         <SetRegEntry>
-           <Number>0</Number>
-           <Key>UL2CM3</Key>
--          <Name>UL2CM3(-S0 -C0 -P0 ) -FN1 -FC1000 -FD20000000 -FF0STM32L0xx_64 -FL010000 -FS08000000 -FP0($$Device:STM32L053R8Tx$Flash/STM32L0xx_64.FLM)</Name>
-+          <Name>UL2CM3(-S0 -C0 -P0 ) -FN1 -FC1000 -FD20000000 -FF0STM32L0xx_64 -FL010000 -FS08000000 -FP0($$Device:STM32L053R8Tx$Flash\STM32L0xx_64.FLM)</Name>
-         </SetRegEntry>
-       </TargetDriverDllRegistry>
-       <Breakpoint/>
-@@ -409,11 +310,16 @@
-       <LintExecutable></LintExecutable>
-       <LintConfigFile></LintConfigFile>
-       <bLintAuto>0</bLintAuto>
--      <Lin2Executable></Lin2Executable>
--      <Lin2ConfigFile></Lin2ConfigFile>
--      <bLin2Auto>0</bLin2Auto>
-       <bAutoGenD>0</bAutoGenD>
--      <bAuto2GenD>0</bAuto2GenD>
-+      <LntExFlags>0</LntExFlags>
-+      <pMisraName></pMisraName>
-+      <pszMrule></pszMrule>
-+      <pSingCmds></pSingCmds>
-+      <pMultCmds></pMultCmds>
-+      <pMisraNamep></pMisraNamep>
-+      <pszMrulep></pszMrulep>
-+      <pSingCmdsp></pSingCmdsp>
-+      <pMultCmdsp></pMultCmdsp>
-     </TargetOption>
-   </Target>
- 
-@@ -607,11 +513,16 @@
-       <LintExecutable></LintExecutable>
-       <LintConfigFile></LintConfigFile>
-       <bLintAuto>0</bLintAuto>
--      <Lin2Executable></Lin2Executable>
--      <Lin2ConfigFile></Lin2ConfigFile>
--      <bLin2Auto>0</bLin2Auto>
-       <bAutoGenD>0</bAutoGenD>
--      <bAuto2GenD>0</bAuto2GenD>
-+      <LntExFlags>0</LntExFlags>
-+      <pMisraName></pMisraName>
-+      <pszMrule></pszMrule>
-+      <pSingCmds></pSingCmds>
-+      <pMultCmds></pMultCmds>
-+      <pMisraNamep></pMisraNamep>
-+      <pszMrulep></pszMrulep>
-+      <pSingCmdsp></pSingCmdsp>
-+      <pMultCmdsp></pMultCmdsp>
-     </TargetOption>
-   </Target>
- 
-@@ -637,7 +548,7 @@
- 
-   <Group>
-     <GroupName>Drivers/BSP/Components</GroupName>
--    <tvExp>0</tvExp>
-+    <tvExp>1</tvExp>
-     <tvExpOptDlg>0</tvExpOptDlg>
-     <cbSel>0</cbSel>
-     <RteFlg>0</RteFlg>
-@@ -717,7 +628,7 @@
-       <GroupNumber>2</GroupNumber>
-       <FileNumber>8</FileNumber>
-       <FileType>1</FileType>
--      <tvExp>0</tvExp>
-+      <tvExp>1</tvExp>
-       <tvExpOptDlg>0</tvExpOptDlg>
-       <bDave2>0</bDave2>
-       <PathWithFileName>..\..\..\..\..\..\..\Drivers\BSP\Components\sx1272\sx1272.c</PathWithFileName>
-@@ -853,7 +764,7 @@
- 
-   <Group>
-     <GroupName>Drivers/BSP/STM32L0xx_Nucleo</GroupName>
--    <tvExp>0</tvExp>
-+    <tvExp>1</tvExp>
-     <tvExpOptDlg>0</tvExpOptDlg>
-     <cbSel>0</cbSel>
-     <RteFlg>0</RteFlg>
-@@ -873,7 +784,7 @@
- 
-   <Group>
-     <GroupName>Drivers/BSP/sx1272mb2das</GroupName>
--    <tvExp>0</tvExp>
-+    <tvExp>1</tvExp>
-     <tvExpOptDlg>0</tvExpOptDlg>
-     <cbSel>0</cbSel>
-     <RteFlg>0</RteFlg>
-@@ -1197,7 +1108,7 @@
- 
-   <Group>
-     <GroupName>Projects/End_Node</GroupName>
--    <tvExp>0</tvExp>
-+    <tvExp>1</tvExp>
-     <tvExpOptDlg>0</tvExpOptDlg>
-     <cbSel>0</cbSel>
-     <RteFlg>0</RteFlg>
-@@ -1205,7 +1116,7 @@
-       <GroupNumber>12</GroupNumber>
-       <FileNumber>42</FileNumber>
-       <FileType>1</FileType>
--      <tvExp>0</tvExp>
-+      <tvExp>1</tvExp>
-       <tvExpOptDlg>0</tvExpOptDlg>
-       <bDave2>0</bDave2>
-       <PathWithFileName>..\..\src\bsp.c</PathWithFileName>
-@@ -1325,7 +1236,7 @@
- 
-   <Group>
-     <GroupName>Middlewares/Lora/Core</GroupName>
--    <tvExp>0</tvExp>
-+    <tvExp>1</tvExp>
-     <tvExpOptDlg>0</tvExpOptDlg>
-     <cbSel>0</cbSel>
-     <RteFlg>0</RteFlg>
-@@ -1333,7 +1244,7 @@
-       <GroupNumber>13</GroupNumber>
-       <FileNumber>52</FileNumber>
-       <FileType>1</FileType>
--      <tvExp>0</tvExp>
-+      <tvExp>1</tvExp>
-       <tvExpOptDlg>0</tvExpOptDlg>
-       <bDave2>0</bDave2>
-       <PathWithFileName>..\..\..\..\..\..\..\Middlewares\Third_Party\Lora\Core\lora.c</PathWithFileName>
-@@ -1345,7 +1256,7 @@
-       <GroupNumber>13</GroupNumber>
-       <FileNumber>53</FileNumber>
-       <FileType>1</FileType>
--      <tvExp>0</tvExp>
-+      <tvExp>1</tvExp>
-       <tvExpOptDlg>0</tvExpOptDlg>
-       <bDave2>0</bDave2>
-       <PathWithFileName>..\..\..\..\..\..\..\Middlewares\Third_Party\Lora\Core\lora-test.c</PathWithFileName>
-diff -uNr before/Projects/Multi/Applications/LoRa/End_Node/MDK-ARM/STM32L053R8-Nucleo/Lora.uvprojx after/Projects/Multi/Applications/LoRa/End_Node/MDK-ARM/STM32L053R8-Nucleo/Lora.uvprojx
---- before/Projects/Multi/Applications/LoRa/End_Node/MDK-ARM/STM32L053R8-Nucleo/Lora.uvprojx	2018-03-29 20:39:56.725512500 +0800
-+++ after/Projects/Multi/Applications/LoRa/End_Node/MDK-ARM/STM32L053R8-Nucleo/Lora.uvprojx	2018-05-24 13:22:29.081109200 +0800
-@@ -11,6 +11,7 @@
-       <ToolsetNumber>0x4</ToolsetNumber>
-       <ToolsetName>ARM-ADS</ToolsetName>
-       <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
-+      <uAC6>0</uAC6>
-       <TargetOption>
-         <TargetCommonOption>
-           <Device>STM32L053R8Tx</Device>
-@@ -1086,7 +1087,8 @@
-       <TargetName>sx1272mb2das</TargetName>
-       <ToolsetNumber>0x4</ToolsetNumber>
-       <ToolsetName>ARM-ADS</ToolsetName>
--      <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
-+      <pCCUsed>5060528::V5.06 update 5 (build 528)::ARMCC</pCCUsed>
-+      <uAC6>0</uAC6>
-       <TargetOption>
-         <TargetCommonOption>
-           <Device>STM32L053R8Tx</Device>
-@@ -2163,6 +2165,7 @@
-       <ToolsetNumber>0x4</ToolsetNumber>
-       <ToolsetName>ARM-ADS</ToolsetName>
-       <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
-+      <uAC6>0</uAC6>
-       <TargetOption>
-         <TargetCommonOption>
-           <Device>STM32L053R8Tx</Device>
-@@ -3236,4 +3239,10 @@
-     </Target>
-   </Targets>
- 
-+  <RTE>
-+    <apis/>
-+    <components/>
-+    <files/>
-+  </RTE>
-+
- </Project>
+
