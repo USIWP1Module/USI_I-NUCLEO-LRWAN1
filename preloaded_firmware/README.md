@@ -5,7 +5,11 @@ How to update I-NUCLEO-LRWAN Preloaded AT command Software
 =====================================================================
 
 !!! Important Note !!!
+
 since the shield board with the preloaded firmware has Flash read protection, it is necessary to backup whole flash/eeprom before any flash programming, please read recover guide in the document below before any flash operations:  
+
+https://github.com/USIWP1Module/USI_I-NUCLEO-LRWAN1/blob/master/preloaded_firmware/WM-SG-SM-42%20recover%20guide.pdf
+
 
 
 
