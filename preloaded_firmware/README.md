@@ -4,6 +4,10 @@ How to update I-NUCLEO-LRWAN Preloaded AT command Software
 
 =====================================================================
 
+!!! Important Note !!!
+since the shield board with the preloaded firmware has Flash read protection, it is necessary to backup whole flash/eeprom before any flash programming, please read recover guide in the document below before any flash operations:  
+
+
 
 #1 download sm42_fw_update_tool from the link below, and upzip it on the Windows PC
    https://github.com/USILoRaModule/USI_I-NUCLEO-LRWAN1/blob/master/preloaded_firmware/sm42_fw_update_tool_v1.1.zip
