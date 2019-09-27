@@ -2,6 +2,26 @@
 I-NUCLEO-LRWAN Preloaded AT command Software - CHANGELOG
 =====================================================================
 
+Changes for version 4.0 
+
+* bug - fix 
+  * got stop mode current back to 230uA. 
+ 
+* New features: 
+  * New AT command:  
+    AT+DFU   update firmware via UART no JTAG needed. 
+  * Support new LoraWAN regions: 
+    AU915  (Australia) 
+
+* Removed features: 
+  * Watchdog commands: 
+    AT+WDG 
+  * I2C commands: 
+    AT+SIIC 
+    AT+RIIC 
+    AT+WIIC 
+
+
 Changes for version 3.7
 
 * bug-fix
