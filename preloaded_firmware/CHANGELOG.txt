@@ -2,6 +2,12 @@
 I-NUCLEO-LRWAN Preloaded AT command Software - CHANGELOG
 =====================================================================
 
+Changes for version 4.0.1
+
+* New features:
+  * each board will has a different and unique provisioning on the DevEUI, AppEUI, AppKEY, DevAddr, NwkSKey, AppSKey in default. and they can be chnaged or restored by AT cmd.
+
+
 Changes for version 4.0 
 
 * bug - fix 
