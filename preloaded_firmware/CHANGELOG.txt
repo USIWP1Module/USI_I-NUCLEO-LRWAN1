@@ -2,6 +2,57 @@
 I-NUCLEO-LRWAN Preloaded AT command Software - CHANGELOG
 =====================================================================
 
+Changes for version 4.0.2
+
+* bug - fix
+  * fixed that module can not report message "AT_ERROR_WAN_SEND" if moudle is unvailable to send packets in fw 4.0.1.
+
+
+* New features:
+
+  * Add command event for: AT+JOIN
+
+    Syntax:
+
+    AT+JOIN=<join_protocol>[,<event_enabled>]
+
+	     <join_protocol> => 0:ABP, 1:OTAA
+	     <event_enabled> => 0:event_disabled, 1:event_enabled
+
+    Responses:
+
+      OK                       command recieved without error.
+
+    Events:
+
+    	 +JoinAccepted            notice LoRaWAN networking now is joned
+    	 +JoinRetry: <Count>      notice a join request will be resent, if event_enabled is set. 
+
+    
+  * Add command event for: AT+SEND
+
+    Syntax:
+
+    AT+SEND=<port>,<payload in hex string format>,<confirm_needed>[,<event_enabled>]
+
+	      <port>           => a port number 0 ~ 255 for the payload
+	      <payload>        => the payload in hex string format.
+       <confirm_needed> => 0: no ask needed, 1: ask needed.
+	      <event_enabled>  => 0:event_disabled, 1:event_enabled
+
+    Response:
+
+    	 OK                       command recieved without error.
+
+    Events:
+
+    	 +TX: Retry, <Count>      if event_enabled is set then module will notice host the packet will be resent, if ACK not received.
+    	 +TX: Error, -110         if event_enabled is set then module will notice host module is stopped to send the packet if TX errors, -110 is ack timeout.
+    	+TX: Done                if event_enabled is set then module will notice host packet was sent successfully.
+
+
+
+
 Changes for version 4.0.1
 
 * New features:
